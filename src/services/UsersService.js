@@ -4,6 +4,7 @@ export default class UsersService{
   static Registration_key = async (payload) => {
     return await APICall('/auth/registration-key', 'POST', payload)
   }
+  
   static Register = async (payload) => {
     return await APICall('/auth/signup/register', 'POST', payload)
   }

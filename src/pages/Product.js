@@ -27,11 +27,11 @@ const Product = () => {
   const defaultSort = { label: 'Price: Low to High', value: 'ascending' };
   const { category } = useParams();
   const { dispatch, activeCategory, activeSchool, filterModalIsOpen } = useAppContext();
-  const [ screenWidth, setScreenWidth ] = useState(window.innerWidth);
-  const [ hasError, setHasError] = useState(false);
-  const [ isLoading, setIsLoading] = useState(true);
-  const [ view, setView ] = useState('list');
-  const [ values, setValues ] = useState({
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [view, setView] = useState('list');
+  const [values, setValues] = useState({
     minPrice: 10, maxPrice: 9000000,
     products: [], sortBy: 'ascending',
     defaultCategory: { label: "All Ads", value: "all" },
@@ -46,9 +46,9 @@ const Product = () => {
   useEffect(() => {
     function handleScreenResize() { setScreenWidth(screenWidth) }
     window.addEventListener('resize', handleScreenResize);
-    return () => { window.removeEventListener('resize', handleScreenResize)}
+    return () => { window.removeEventListener('resize', handleScreenResize) }
   }, []);
-  
+
   // Get all the filters 
   const getProducts = async () => {
     // dispatch({ type: FIND_BY_CATEGORY_BEGINS });
@@ -56,8 +56,8 @@ const Product = () => {
     setIsLoading(true);
     try {
       // For Mobile Screen
-      if(screenWidth < 992 && filterModalIsOpen === true ){
-        dispatch({ type: OPEN_FILTER_MODAL, payload: { value: false }});
+      if (screenWidth < 992 && filterModalIsOpen === true) {
+        dispatch({ type: OPEN_FILTER_MODAL, payload: { value: false } });
       }
       const { data } = await ProductService.GetProducts({
         category: activeCategory, school: activeSchool, minPrice: values.minPrice, maxPrice: values.maxPrice,
@@ -66,7 +66,7 @@ const Product = () => {
         dateTo: Date.parse(values.dateTo),
         searchText: values.searchText
       });
-      
+
       if (data) {
         setValues((prev) => ({ ...prev, products: data.products, totalPages: data.totalPages }));
         // dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
@@ -86,7 +86,7 @@ const Product = () => {
   useEffect(() => {
     updateFilter();
   }, [values.searchText])
-  
+
   const updateFilter = (value, type) => {
     if (type === 'school') {
       return localStorage.setItem("school", value)
@@ -106,7 +106,7 @@ const Product = () => {
     else if (type === 'dateFrom') {
       localStorage.setItem('dateFrom', value)
     }
-    else if(type === 'search'){
+    else if (type === 'search') {
       localStorage.setItem('searchText', value)
     }
   }
@@ -115,12 +115,12 @@ const Product = () => {
     <>
       <section className="container-fluid" id="products">
         <div className="container">
-          { filterModalIsOpen === false &&
+          {filterModalIsOpen === false &&
             <div className="border d-block p-2">
-            <p className="category-label d-inline-block m-0 me-2 fs-5"> Categories </p>
-            <p className="d-inline-block m-0 me-2 fs-5"> / </p>
-            <p className="category-label d-inline-block m-0 fs-5">{ findCategoryLabel(activeCategory, values) } </p>
-          </div>
+              <p className="category-label d-inline-block m-0 me-2 fs-5"> Categories </p>
+              <p className="d-inline-block m-0 me-2 fs-5"> / </p>
+              <p className="category-label d-inline-block m-0 fs-5">{findCategoryLabel(activeCategory, values)} </p>
+            </div>
           }
         </div>
 
@@ -128,12 +128,12 @@ const Product = () => {
           <div className="row">
             {/* Left */}
             <div className={`col-sm-12 col-lg-3 mt-2 ${screenWidth < 992 && filterModalIsOpen ? 'filter-container' : 'hide'}`}>
-              { screenWidth < 992 && filterModalIsOpen && <div className="arrow-icon-container py-2 mb-2 mt-1">
-                  <div className="arrow-icon-wrapper" onClick={ () => { dispatch({ type: OPEN_FILTER_MODAL, payload:{ value: false }}) }}>
+              {screenWidth < 992 && filterModalIsOpen && <div className="arrow-icon-container py-2 mb-2 mt-1">
+                <div className="arrow-icon-wrapper" onClick={() => { dispatch({ type: OPEN_FILTER_MODAL, payload: { value: false } }) }}>
                   <i className="fa-solid fa-chevron-left arrow-icon"></i>
-                    <span className='my-auto fs-4'>back</span>
-                  </div>
+                  <span className='my-auto fs-4'>back</span>
                 </div>
+              </div>
               }
 
               <form className="form" onSubmit={getProducts}>
@@ -197,7 +197,7 @@ const Product = () => {
             </div>
 
             {/* Right */}
-            <div className={`col-sm-12 col-lg-9 ${ screenWidth < 992 && filterModalIsOpen === false ? '' : 'hide' }`}>
+            <div className={`col-sm-12 col-lg-9 ${screenWidth < 992 && filterModalIsOpen === false ? '' : 'hide'}`}>
               {/* Views and Products */}
               <div className="container-fluid border h-100 py-3">
                 {/* Views */}
@@ -205,27 +205,27 @@ const Product = () => {
                   <div className="row">
                     <div className="col-6 d-flex align-items-center">
                       <label className="view-color fs-5">View: </label>
-                      <span className="mx-3"><i onClick={() => setView('grid')} style={{color: view === 'grid' ? 'green' : 'lightgrey'}} className="fa-solid fa-table-cells icon"></i></span>
+                      <span className="mx-3"><i onClick={() => setView('grid')} style={{ color: view === 'grid' ? 'green' : 'lightgrey' }} className="fa-solid fa-table-cells icon"></i></span>
                       {/* <span className="mx-3"><FontAwesomeIcon style={{color: view === 'grid' ? 'green' : 'lightgrey'}} onClick={() => setView('grid')} className="icon" icon={faTableCells} /></span> */}
                       {/* <span className=""><FontAwesomeIcon style={{color: view === 'list' ? 'green' : 'lightgrey'}} onClick={() => setView('list')} className="icon" icon={faList} /></span> */}
-                      <span className=""><i onClick={() => setView('list')} style={{color: view === 'list' ? 'green' : 'lightgrey'}} className="fa-solid fa-list icon"></i></span>
+                      <span className=""><i onClick={() => setView('list')} style={{ color: view === 'list' ? 'green' : 'lightgrey' }} className="fa-solid fa-list icon"></i></span>
                     </div>
-                    
+
                     {/* Filter button for mobile screen */}
-                    { screenWidth < 992 && 
+                    {screenWidth < 992 &&
                       <div className="col-6 d-flex justify-content-end">
                         <div className="filter-text-wrapper border px-3 py-1" onClick={() => {
-                          dispatch({ type: OPEN_FILTER_MODAL, payload: { value: true }});
+                          dispatch({ type: OPEN_FILTER_MODAL, payload: { value: true } });
                         }}>
                           <span><i className="fa-solid fa-filter icon"></i></span>
                           <span className="filter-text ms-2 fs-4">Filter</span>
                         </div>
-                      </div> 
+                      </div>
                     }
                   </div>
                 </div>
                 {/* Products */}
-                { isLoading === true ? <Loading /> : isLoading === false && hasError === true ? <Error /> :
+                {isLoading === true ? <Loading /> : isLoading === false && hasError === true ? <Error /> :
                   isLoading === false && hasError === false && values.products?.length === 0 ? <Empty /> : <div className="container mt-3">
                     <div className="row products-container">
                       {values.products?.map(product => <ProductCard view={view} category={category} key={product._id} {...product} />)}
@@ -233,7 +233,7 @@ const Product = () => {
                   </div>
                 }
                 {/* Pagination */}
-                { hasError === false && values.products?.length >= 1 &&
+                {hasError === false && values.products?.length >= 1 &&
                   <div className="container mt-3">
                     <Pagination {...values} setValues={setValues} />
                   </div>
