@@ -1,0 +1,150 @@
+#navbar{
+  height: 8vh;
+  width: 100%;
+  
+  .navbar-wrapper{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color:#047878;
+  }
+
+  .logo-container{
+    margin-left: 25px;
+  }
+
+  .logo-link{
+    text-decoration: none;
+    font-size: 2rem;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+  }
+
+  strong > span{
+    text-decoration: none;
+    font-size: 2rem;
+    letter-spacing: 0.03em;
+    color:  #fff;
+  }
+
+  strong{
+    font-family: 'Leckerli One', cursive;
+    color: #fff;
+    font-size: 2.5rem;
+  }
+
+  nav{
+    width: 100%;
+    display: block;
+    height: 100%;
+    position: relative;
+  }
+
+  ul{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  nav > ul > .login{
+    margin-right: 10px;
+    border-right: 2px solid #fff;  
+    padding-right: 10px;
+  }
+
+  nav > ul > li{
+    list-style: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+
+  nav > ul > li > .nav-link{
+    margin: auto 0;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #fff;
+  }
+
+  .dropdown-container{
+    background-color: #b1d0ba !important;
+    position: absolute;
+    z-index: 1;
+    right: 2px;
+    top: 8vh;
+    // min-height: 60px;
+    
+
+    & > .dropdown-wrapper{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      align-items: center !important;
+      justify-content: center !important;
+
+    }
+
+    & > .dropdown-wrapper > li{
+      list-style-type: none;
+      text-align: center;
+      padding: 7px 2px !important;
+    }
+
+    
+    & > .dropdown-wrapper > li:first-of-type{
+      border-bottom: 1px solid #000;
+    }
+
+
+    & > .dropdown-wrapper > li > .profile-link{
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0 50px;
+    }
+  }
+
+  .profile{
+    cursor: pointer;
+  }
+  
+  .profile-icon{
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile-image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+
+  @media screen and (max-width: 487px) {
+    .dropdown-wrapper > li > .profile-link{
+      padding: 0 30px !important;
+    }
+
+    .profile-image{
+      width: 50px;
+      height: 50px;
+    }
+
+    strong{ font-size: 2.62rem !important }
+    strong > span { font-size: 1.9rem !important }
+  }
+
+  @media screen and (max-width: 360px) {
+    .profile-image{
+      width: 45px;
+      height: 45px;
+    }
+    strong{ font-size: 2.32rem !important }
+    strong > span { font-size: 1.7rem !important }
+  }
+}

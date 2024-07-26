@@ -1,0 +1,9 @@
+.home {
+  background-color: black;
+  background-image: url('../../assets/campus4.jpg');
+  background-size: cover; // Changed from 'contain' to 'cover'
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; // Added this line
+  height: 100vh;
+}

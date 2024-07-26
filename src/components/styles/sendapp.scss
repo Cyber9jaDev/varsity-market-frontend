@@ -1,0 +1,90 @@
+#send-app{
+
+  padding: 30px;
+  // background-color: white;
+
+  h2{
+    color: #fff;
+    font-size: 3rem;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+  }
+
+  h2::after{
+      content: '';
+      width: 100px;
+      display: block;
+      margin: 0 auto;
+      padding: 5px 0 !important;
+      border-bottom: 2px solid #f3c500 !important;
+      margin-bottom: 20px;
+  }
+
+  p{
+    color: #fff;
+    width: 30%;
+    text-align: center;
+    margin: 30px auto;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  div{
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    margin: 15px 0;
+    border-radius: 5px;
+    // padding: 10px
+  }
+
+  button{
+    // color: #f3c5/00;
+    height: 100%;
+    outline: none;
+    border: none;
+    background-color: #f3c500;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+
+  input{
+    width: 300px;
+    padding: 10px ;
+    border: 2px solid lightgray;
+    outline:  none;
+    border-radius: 5px 0 0 5px;
+  }
+
+  .store-img{
+    width: 180px;
+    height: 50px;
+  }
+
+  @media screen and (max-width: 768px){
+    h2{
+      font-size: 2.3rem;
+    }
+
+    p{
+      width: 100%;
+    }
+
+    .store-img{
+      width: 140px;
+    }
+    input{
+      width: 200px;
+    }
+  }
+
+  @media screen and (max-width: 480px){
+    h2{
+      font-size: 2rem;
+    }
+  }
+}

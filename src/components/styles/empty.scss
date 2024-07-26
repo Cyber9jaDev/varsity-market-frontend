@@ -1,0 +1,41 @@
+#empty{
+  height: 100%;
+  width: 100%;
+  padding: 20px 0;
+
+  .empty-container{
+    height: 50vh;
+  }
+
+  .bg-img-wrapper{
+    background-image: url('../../assets/background4.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    background-size: contain;
+  }
+
+  h2{
+    color: blue;
+    font-size: 3rem;
+  }
+
+  p{
+    color: rgb(49, 49, 155);
+    font-size: 2rem;
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width:768px) { 
+    .bg-img-wrapper{ height: 60% }
+    h2{ font-size: 2.3rem }
+    p{ font-size: 1.4rem }
+  }
+
+  @media screen and (max-width:768px) { 
+    .bg-img-wrapper{ height: 60% }
+    h2{ font-size: 2rem }
+    p{ font-size: 1.2rem }
+  }
+
+}

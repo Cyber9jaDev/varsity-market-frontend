@@ -1,0 +1,95 @@
+#categories-section{
+  width: 100%;
+  margin: 40px auto;
+  box-shadow: 0px 1px 0px 0px rgb(13, 103, 98);
+  padding: 20px 0;
+  background-color: #fff;
+
+  #categories{
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .categories-wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 20px;
+  }
+
+  .category-container{
+    grid-column: span 4;
+    min-height: 150px;
+
+    &:hover{
+      background-color: #01a185;
+      transform: scale(1.04);
+      transition: all 1s ease-in-out;
+      
+      .category-link{
+        color: #f3c500 !important;
+      }
+    }
+  }
+
+  .category-link{
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 3px;
+    flex-direction: column;
+    text-decoration: none;
+    height: 100%;
+    padding: 10px 0;
+  }
+
+  .icon-container{
+    color: #fff;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+  }
+
+  // .icon{ width: 50px; height: 50px; font-size: 2rem; }
+  .icon{ font-size: 2.5rem; }
+  .all{ background-color: lightcoral; }
+  .mobile{ background-color: lightseagreen; }
+  .computer { background:#ff9e29; }
+  .car { background:lightsteelblue; }
+  .bike { background:#15c01c; }
+  .furniture { background:#7e3b07; }
+  .pet { background:#1963ce; }
+  .book { background:#c119ce; }
+  .accommodation { background:#df8012; }
+  .fashion { background:#1ca39d; }
+
+  .category-title{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.1em;
+    padding: 0 2px;
+  }
+
+
+  @media screen and (max-width: 768px){
+    .category-container{
+      grid-column: span 6;
+    }
+
+    #categories{
+      // width: 100%;
+      // margin: 20px auto;
+    }
+  }
+
+  @media screen and (max-width: 480px){
+    // .category-container{
+    //   grid-column: span 12;
+    // }
+  }
+}

@@ -1,0 +1,30 @@
+#loading{
+
+  min-height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .loading-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;;
+  }
+
+  @media screen and (max-width: 768px) {
+    min-height: 40vh;
+
+  }
+
+  @media screen and (max-width: 540px) {
+    min-height: 35vh;
+  }
+
+  
+  @media screen and (max-width: 480px) {
+    min-height: 30vh;
+  }
+}
