@@ -1,0 +1,240 @@
+#main-chat-wrapper{
+  width: 100vw !important;
+  max-height: 100vh !important;
+
+  .empty-chat{
+    height: 100%;
+    grid-column: span 9;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+
+    & > h1{
+      font-weight: bolder;
+      text-shadow: #01A185;
+      text-transform:uppercase;
+      color: #01A185 !important;
+    }
+  }
+
+  #chat{
+    width: 100% !important;
+    height: 100vh !important;
+
+    .chat-container{
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      height: 100%;
+      width: 100%;
+    }
+
+    .conversation{
+      grid-column: span 3;
+      height: 100%;
+      padding: 10px;
+      // box-shadow: 2px 3px 1px -1px #01A185;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      background: #FFFFFF;
+      overflow-y: scroll !important;
+      overflow-x: scroll !important;
+      height: 100vh !important;
+      &::-webkit-scrollbar{
+        display: none;
+      }
+    }
+
+    .online{
+      color: #01A185 !important;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .offline{
+      color: black !important;
+    }
+
+    .search-container{
+      background: #E7EBF6;
+      border-radius: 5px;
+    }
+
+    input[type="search"]{
+      margin-left: 3px;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      background:  inherit;
+    }
+
+    .chat-block{
+      cursor: pointer;
+      background: #f6f6f6;
+      display: flex;
+      align-items:  center;
+      height: 70px;
+      border-radius: 5px;
+    }
+
+    .chat-box-container{
+      grid-column: span 9;
+      // padding: 15px;
+    }
+
+    .icon{
+      cursor: pointer;
+      color: red;
+    }
+
+    .chat-image{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .second-user-data{
+      height: 10vh;
+      border-bottom: solid black 1px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 1px;
+      padding: 0 15px;
+
+    }
+
+    .send-message-container{
+      height: 10vh;
+      padding: 15px;
+    }
+
+    .messageText{
+      width: 100%;
+      outline: none;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #01A185;
+      margin: 0 10px 0 0;
+      background-color: #f6f6f6;
+    }
+    
+    .chat-list{
+      width: 100%;
+      display: flex !important;
+      flex-direction: column;
+      overflow-y: scroll !important;
+      overflow-x: scroll !important;
+      height: 75vh !important;
+      &::-webkit-scrollbar{
+        display: none;
+      }
+      padding: 15px;
+    }
+
+    .message-wrapper{
+      min-width: 120px;
+      color: #fff;
+      padding: 8px;
+      margin: 5px 0;
+      max-width: 100%;
+
+      & > .text{
+        margin: 0;
+        overflow-wrap:break-word;
+      }
+    }
+
+    .own{
+      background:#01A185;
+      border-radius: 20px 3px 20px 3px;
+      margin-left: auto;
+    }
+
+    .second-user{
+      background: #1d1c1c;
+      margin-right: auto;
+      border-radius: 3px 20px 3px 20px;
+    }
+
+    .text{
+      font-size: 0.9rem;
+      margin: auto;
+      padding: 0 0 5px 0;
+      font-weight: 600;
+    }
+
+    .time{
+      padding: 5px 0 0 0;
+      font-size: 0.7rem;
+      margin: auto;
+      font-family: 'Inter', sans-serif;
+      font-weight: light;
+      color: #e8d88e;
+    }
+
+    .send-message-wrapper{
+      display: flex;
+      justify-content: center;
+      align-items:center;    
+      background: #01A185;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+
+    .null-chat{
+      grid-column: span 9;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-weight: bold;
+
+      & > h1{
+        font-weight: bolder;
+        text-shadow: #01A185;
+        text-transform:uppercase ;
+        color: #01A185;
+      }
+    }
+
+    @media screen and (max-width: 1080px) {
+      .conversation{
+        grid-column: span 4;
+      }
+
+      .chat-box-container{
+        grid-column: span 8;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+
+      .second-user-data{
+        height: 10vh;
+        border-bottom: solid black 1px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 1px;
+        padding: 0 15px;
+      }
+
+      .send-message-container{
+        height: 8vh;
+      }
+
+      .hide{
+        display: none !important;
+      }
+
+      .conversation{
+        grid-column: span 12;
+      }
+
+      .chat-box-container{
+        grid-column: span 12;
+      }
+
+    }
+  }
+
+}

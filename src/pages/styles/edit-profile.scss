@@ -1,0 +1,84 @@
+#edit-profile{
+
+  .form-container{
+    padding-bottom: 20px;
+  }
+
+  form{
+    width: 95%;
+    margin: auto;
+  }
+
+  .header-container{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+  }
+
+  .text-container{
+    margin: 0 auto;
+  }
+
+  .text{
+    color: #000000;
+    font-weight: 600;
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 28px;
+  }
+
+  .form-control{
+    margin : 10px 0;
+  }
+
+  .icon{
+    width: 25px;
+    height: 25px;
+  }
+
+  input, label{
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  label{
+    font-size: 1.1em;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    color: #393434;
+    letter-spacing: 0.25px;
+    font-weight: 600;
+  }
+
+  input{ 
+    height: 45px;
+    outline: none;
+    border: 0.001px solid lightblue;
+    letter-spacing: 0.25px;
+    color: #212121;
+    border-radius: 3px;
+    padding: 0 5px;
+  }
+
+  .button{
+    margin: 20px 0;
+    width: 100%;
+    outline: none;
+    border: 0.001px solid lightblue;
+    border-radius: 5px;
+    height: 50px;
+    background-color: #f3c500;
+    font-weight: 500;
+    font-size: 1.1em;
+    letter-spacing: 0.005em;
+    color: #0f0e0e;
+    text-transform: uppercase;
+
+    &:hover{
+      background:#01A185;
+      color: #fff;
+    }
+  }
+}
