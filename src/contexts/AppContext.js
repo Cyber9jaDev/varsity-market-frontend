@@ -45,13 +45,15 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem("currentUser");
   };
 
-  const register = async ({ name, email, password, confirmPassword, phone }) => {
+  const register = async ({ name, email, password, confirmPassword, phone, userType }) => {
     dispatch({ type: REGISTRATION_BEGINS });
 
-    if (!name || !email || !password || !confirmPassword || !phone) {
+    if (!name || !email || !password || !confirmPassword || !phone || !userType) {
       displayAlert("error", "Please fill all fields");
       return dispatch({ type: REGISTRATION_ERROR });
     }
+
+    console.log(name, email, password, phone, userType, confirmPassword);
 
     if (password !== confirmPassword) {
       displayAlert("error", "Passwords do not match");
@@ -59,10 +61,10 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await UsersService.Register({ email, password, name, phone });
-      saveUserToLocalStorage(data);
-      dispatch({ type: REGISTRATION_SUCCESS });
-      dispatch({ type: SET_CURRENT_USER, payload: { ...data } });
+      // const { data } = await UsersService.Register({ email, password, name, phone, userType });
+      // saveUserToLocalStorage(data);
+      // dispatch({ type: REGISTRATION_SUCCESS });
+      // dispatch({ type: SET_CURRENT_USER, payload: { ...data } });
       return displayAlert("success", "Registration Successful! Redirecting...");
     } catch (error) {
       displayAlert("error", error.response.data.message);

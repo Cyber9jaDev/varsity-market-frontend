@@ -1,12 +1,13 @@
 import APICall from "../utilities/APICall";
 
 export default class UsersService{
-  static Registration_key = async (payload) => {
-    return await APICall('/auth/registration-key', 'POST', payload)
-  }
+  // static Registration_key = async (payload) => {
+  //   return await APICall('/auth/registration-key', 'POST', payload)
+  // }
   
   static Register = async (payload) => {
-    return await APICall('/auth/signup/register', 'POST', payload)
+    const userType = payload?.userType;
+    // return await APICall(`/auth/signup/${userType}`, 'POST', payload)
   }
 
   static Login = async (payload) => {

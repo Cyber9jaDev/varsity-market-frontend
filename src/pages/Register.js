@@ -3,8 +3,6 @@ import './styles/register.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../contexts/AppContext';
 import { refresh } from '../utilities/utils';
-import Select from "react-select";
-import schools from '../utilities/schools';
 
 const Register = () => {
   const { register, currentUser } = useAppContext();
@@ -18,27 +16,13 @@ const Register = () => {
     password: '',
     confirmPassword: '',
     phone: '',
-    userType: ''
+    userType: "BUYER"
   });
-
-  const CUSTOM_SELECT_STYLE = {
-    control: (provided, state) => ({
-      ...provided,
-      height: '60px',
-      minHeight: '60px',
-      outline: null,
-      borderRadius: "3px",
-      border: "1px solid rgb(227, 231, 232)",
-      padding: "10px",
-      color: "#000000",
-      width: "100%"
-    }),
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    await register({...formData});
+    await register({ ...formData });
     setIsLoading(false);
   }
 
@@ -51,14 +35,14 @@ const Register = () => {
   }
 
   useEffect(() => {
-    if(currentUser){
+    if (currentUser) {
       setTimeout(() => {
         navigate('/');
         refresh();
       }, 1000);
     }
   }, [currentUser, navigate]);
-  
+
 
 
   return (
@@ -75,9 +59,9 @@ const Register = () => {
                 <input placeholder='Email' onChange={handleChange} type="email" name="email" id="email" required />
               </div>
               <div className="col-lg-6 col-sm-12 my-3">
-                <select name="userType" id="userType">
-                  <option value="SELLER">Seller</option>
+                <select onChange={handleChange} defaultValue="BUYER" name="userType" id="userType">
                   <option value="BUYER">Buyer</option>
+                  <option value="SELLER">Seller</option>
                   <option value="ADMIN">Admin</option>
                 </select>
               </div>
@@ -92,11 +76,11 @@ const Register = () => {
               </div>
             </div>
           </div>
-          
+
           <button disabled={isLoading} type="submit" className='submit-btn'> Create Account</button>
-          
-          <p className='login-text'>Already have an account?<Link style={{paddingLeft: '5px'}} to='/login'>Login</Link></p>
-        
+
+          <p className='login-text'>Already have an account?<Link style={{ paddingLeft: '5px' }} to='/login'>Login</Link></p>
+
         </form>
 
 
