@@ -7,7 +7,9 @@ export default class UsersService{
   
   static Register = async (payload) => {
     const userType = payload?.userType;
-    // return await APICall(`/auth/signup/${userType}`, 'POST', payload)
+    delete payload.userType;
+    console.log(payload);
+    return await APICall(`/auth/signup/${userType}`, 'POST', payload);
   }
 
   static Login = async (payload) => {

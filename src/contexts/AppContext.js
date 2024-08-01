@@ -53,18 +53,16 @@ export const AppProvider = ({ children }) => {
       return dispatch({ type: REGISTRATION_ERROR });
     }
 
-    console.log(name, email, password, phone, userType, confirmPassword);
-
     if (password !== confirmPassword) {
       displayAlert("error", "Passwords do not match");
       return dispatch({ type: REGISTRATION_ERROR });
     }
 
     try {
-      // const { data } = await UsersService.Register({ email, password, name, phone, userType });
-      // saveUserToLocalStorage(data);
-      // dispatch({ type: REGISTRATION_SUCCESS });
-      // dispatch({ type: SET_CURRENT_USER, payload: { ...data } });
+      const { data } = await UsersService.Register({ email, password, name, phone, userType });
+      saveUserToLocalStorage(data);
+      dispatch({ type: REGISTRATION_SUCCESS });
+      dispatch({ type: SET_CURRENT_USER, payload: { ...data } });
       return displayAlert("success", "Registration Successful! Redirecting...");
     } catch (error) {
       displayAlert("error", error.response.data.message);
