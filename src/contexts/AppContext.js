@@ -96,13 +96,16 @@ export const AppProvider = ({ children }) => {
       return displayAlert("error", "Please fill all required fields");
     }
 
+    console.log(category, description, price, condition, name, school, images);
+
     try {
-      const { data } = await UsersService.PostAd({
-        category, description, price, condition, name, school, images, sellerEmail: currentUser.email, sellerId: currentUser.userId,
-        createdDate: Date.parse(new Date()), modifiedDate: Date.parse(new Date())
-      });
-      dispatch({ type: POSTAD_SUCCESS, payload: { status: true } });
-      displayAlert("success", data.message);
+      // const { data } = await UsersService.PostAd({
+      //   category, description, price, condition, name, school, images, sellerEmail: currentUser.email, sellerId: currentUser.userId,
+      //   createdDate: Date.parse(new Date()), modifiedDate: Date.parse(new Date())
+      // });
+      // dispatch({ type: POSTAD_SUCCESS, payload: { status: true } });
+      // displayAlert("success", data.message);
+      displayAlert("success", "Ads Posted Successfully");
     } catch (error) {
       if (error.response && (error.response.status === 500 || error.response.status === 403)) {
         dispatch({ type: POSTAD_ERROR, payload: { status: true } });

@@ -8,16 +8,15 @@ export default class UsersService{
   static Register = async (payload) => {
     const userType = payload?.userType;
     delete payload.userType;
-    console.log(payload);
     return await APICall(`/auth/signup/${userType}`, 'POST', payload);
   }
 
   static Login = async (payload) => {
-    return await APICall('/api/login', 'POST', payload);
+    return await APICall('/auth/signin', 'POST', payload);
   }
 
   static PostAd = async (payload) => {
-    return await APICall('/api/post-ad', 'POST', payload);
+    return await APICall('/product', 'POST', payload);
   }
 
   static getUser = async (userId) => {

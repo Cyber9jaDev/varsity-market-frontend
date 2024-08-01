@@ -3,52 +3,47 @@ import schools from './schools';
 
 export const categories = [
     {
-      value: 'all',
-      icon: 'fa-solid fa-cart-shopping',
-      label: 'All Categories',
-    },  
-    {
-      value: 'mobile',
+      value: 'PHONE',
       icon: 'fa-solid fa-mobile-screen-button',
       label: 'Mobile Phones',
     },
     {
-      value: 'computer',
+      value: 'LAPTOP',
       icon: 'fa-solid fa-laptop',
       label: 'Laptop and Accessories'
     },
     {
-      value: 'car',
+      value: 'CAR',
       icon: 'fa-solid fa-car',
       label: 'Cars'
     },
     {
-      value: 'bike',
+      value: 'BIKE',
       icon: 'fa-solid fa-motorcycle',
       label: 'Bikes'
     },
     {
-      value: 'furniture',
+      value: 'FURNITURE',
       icon: 'fa-solid fa-chair',
       label: 'Furnitures'
     },
     {
-      value: 'pet',
+      value: 'PET',
       icon: 'fa-solid fa-paw',
       label: 'Pets'
     },
     {
-      value: 'book',
+      value: 'BOOK',
       icon: 'fa-solid fa-book',
       label: 'Books'
     },
     {
-      value: 'fashion',
+      value: 'FASHION',
       icon: 'fa-solid fa-shirt',
       label: 'Fashion'
     },
     {
-      value: 'accommodation',
+      value: 'ACCOMMODATION',
       icon: 'fa-solid fa-home',
       label: 'Accommodation'
     },

@@ -43,8 +43,6 @@ const Register = () => {
     }
   }, [currentUser, navigate]);
 
-
-
   return (
     <section id='register'>
       <div className="register-wrapper">

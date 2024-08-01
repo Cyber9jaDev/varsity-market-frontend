@@ -12,12 +12,17 @@ const PostAd = () => {
   const { postAd, adPostedSuccessfully, adPostFailed, removeUserFromLocalStorage, dispatch, isLoading } = useAppContext();
 
   const [values, setValues] = useState({
-    category: "all", description: "", price: 0, condition: "", name: "", school: "all", 
-    defaultCategory: { value: 'mobile', label: 'Mobile Phones' }, 
-    defaultSchool: { label: "University of Ibadan", value: "UI" }
+    name: "",
+    price: 0,
+    description: "",
+    location: "",
+    condition: "",
+    category: "",
+    defaultCategory: { value: 'PHONE', label: 'Mobile Phones' },
+    defaultSchool: { value: "UI", label: "University of Ibadan" }
   });
-  
   const [images, setImages] = useState([]);
+
   const navigate = useNavigate();
 
   const handleImage = (e) => {
@@ -37,7 +42,7 @@ const PostAd = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(values.price > 9000000) {
+    if (values.price > 9000000) {
       return displayAlert('error', 'Price cannot exceed 9 million naira');
     }
     return postAd({ ...values, images });
@@ -82,28 +87,36 @@ const PostAd = () => {
     <section id="post-ad">
       <div className="post-ad-wrapper">
 
-      <form className="form-control" onSubmit={handleSubmit}>
-        <div className="header-text-wrapper">
-          <h3 className="header-text">Post an ad</h3>
-        </div>
-        <div className="form-group">
-          <label htmlFor="category"> {" "} Category<span className="asterisk">*</span></label>
-          <Select styles={style} defaultValue={values.defaultCategory} onChange={(e) => setValues((prev) => ({ ...prev, category: e.value }))} isSearchable options={categories.slice(1)} />
-        </div>
-        <FormRow field="input" handleChange={handleChange} type="text" name="name" label="Title" placeholder="HP, Toyota e.t.c" />
-        <FormRow field="input" handleChange={handleChange} name="price" type="number" label="Price(N)" price={values.price} />
-        <FormRow field="input" handleChange={handleChange} name="condition" type="text" label="Condition" placeholder="e.g new, used, refurbished e.t.c" />
-        <FormRow field="file" handleChange={handleImage} name="photos" label="Product Photos" />
-        <div className="form-group">
-          <label htmlFor="school"> {" "} School<span className="asterisk">*</span></label>
-          <Select styles={style} isSearchable options={schools.slice(1)} defaultValue={schools[0]} onChange={(e) => setValues((prev) => ({ ...prev, school: e.value }))} />
-        </div>
-        <FormRow field="textarea" handleChange={handleChange} id="description" name="description" label="Product Description" placeholder="Briefly describe your product" />
-        <div className="submit-btn-wrapper">
-          <button disabled={isLoading} className="button">{isLoading ? 'Loading...' : 'Post ad'}</button>
-        </div>
-        
-      </form>
+        <form className="form-control" onSubmit={handleSubmit}>
+          <div className="header-text-wrapper">
+            <h3 className="header-text">Post an ad</h3>
+          </div>
+
+          <FormRow field="input" handleChange={handleChange} type="text" name="name" label="Title" placeholder="HP, Toyota e.t.c" />
+          <div className="form-group">
+            <label htmlFor="category"> {" "} Category<span className="asterisk">*</span></label>
+            <Select styles={style} defaultValue={values.defaultCategory} onChange={(e) => setValues((prev) => ({ ...prev, category: e.value }))} isSearchable options={categories.slice(1)} />
+          </div>
+          <FormRow field="input" handleChange={handleChange} name="price" type="number" label="Price(N)" price={values.price} />
+          <div className="form-group">
+            <label htmlFor="condition">Condition</label>
+            <select name="condition" id="condition">
+              <option value="NEW">New</option>
+              <option value="USED">Used</option>
+              <option value="REFURBISHED">Refurbished</option>
+            </select>
+          </div>
+          <FormRow field="file" handleChange={handleImage} name="photos" label="Product Photos" />
+          <div className="form-group">
+            <label htmlFor="location"> {" "} Location<span className="asterisk">*</span></label>
+            <Select styles={style} isSearchable options={schools.slice(1)} defaultValue={schools[0]} onChange={(e) => setValues((prev) => ({ ...prev, school: e.value }))} />
+          </div>
+          <FormRow field="textarea" handleChange={handleChange} id="description" name="description" label="Product Description" placeholder="Briefly describe your product" />
+          <div className="submit-btn-wrapper">
+            <button disabled={isLoading} className="button">{isLoading ? 'Loading...' : 'Post ad'}</button>
+          </div>
+
+        </form>
       </div>
     </section>
   );
