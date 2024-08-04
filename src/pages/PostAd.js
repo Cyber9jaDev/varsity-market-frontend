@@ -25,20 +25,20 @@ const PostAd = () => {
   const navigate = useNavigate();
 
   const handleImage = (e) => {
-    const files = [...e.target.files];
-    setImages([...e.target.files])
+    e.preventDefault();
+    setImages([...e.target.files ]);
     // convertImageToBase64(files);
   };
 
-  const convertImageToBase64 = (files) => {
-    files.map((file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      return (reader.onloadend = () => {
-        setImages((prev) => [...prev, reader.result]);
-      });
-    });
-  };
+  // const convertImageToBase64 = (files) => {
+  //   files.map((file) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     return (reader.onloadend = () => {
+  //       setImages((prev) => [...prev, reader.result]);
+  //     });
+  //   });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,7 +71,7 @@ const PostAd = () => {
   //   }
   // }, [adPostFailed, removeUserFromLocalStorage]);
 
-  
+  // console.log(images);
 
   return (
     <section id="post-ad">
