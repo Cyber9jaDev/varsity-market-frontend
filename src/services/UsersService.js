@@ -1,10 +1,10 @@
 import APICall from "../utilities/APICall";
 
-export default class UsersService{
+export default class UsersService {
   // static Registration_key = async (payload) => {
   //   return await APICall('/auth/registration-key', 'POST', payload)
   // }
-  
+
   static Register = async (payload) => {
     const userType = payload?.userType;
     delete payload.userType;
@@ -16,16 +16,17 @@ export default class UsersService{
   }
 
   static PostAd = async ({ category, description, price, condition, name, location, images }) => {
-    console.log(category, description, price, condition, name, location, images);
-    // let formData = new FormData();
-    // formData.append('category', category);
-    // formData.append('description', description);
-    // formData.append('price', price);
-    // formData.append('condition', condition);
-    // formData.append('name', name);
-    // formData.append('location', location);
-    // formData.append("productImages", images);
-    // return await APICall('/product', 'POST', payload);
+    // console.log(category, description, price, condition, name, location, images);
+    let formData = new FormData();
+    formData.append('category', category);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('condition', condition);
+    formData.append('name', name);
+    formData.append('location', location);
+    formData.append("productImages", images);
+    
+    return await APICall('/product', 'POST', formData);
   }
 
   static getUser = async (userId) => {
@@ -37,14 +38,14 @@ export default class UsersService{
   }
 
   static deleteAd = async (productId) => {
-    return await APICall (`api/user-ads/id/${productId}`, 'DELETE')
+    return await APICall(`api/user-ads/id/${productId}`, 'DELETE')
   }
 
   static uploadProfilePicture = async (userId, payload) => {
     return await APICall(`api/upload-profile-picture/${userId}`, 'PATCH', payload);
   }
 
-  static updateUserProfile = async(payload) => {
-    return await APICall('api/update-user-info', 'PATCH', payload );
+  static updateUserProfile = async (payload) => {
+    return await APICall('api/update-user-info', 'PATCH', payload);
   }
 }

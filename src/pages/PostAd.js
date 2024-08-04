@@ -26,7 +26,8 @@ const PostAd = () => {
 
   const handleImage = (e) => {
     const files = [...e.target.files];
-    convertImageToBase64(files);
+    setImages([...e.target.files])
+    // convertImageToBase64(files);
   };
 
   const convertImageToBase64 = (files) => {

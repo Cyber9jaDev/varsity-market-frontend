@@ -97,9 +97,6 @@ export const AppProvider = ({ children }) => {
       return dispatch({ type: POSTAD_ERROR, payload: { status: true } });
     }
 
-    console.log(category, description, price, condition, name, location, images);
-
-
     try {
       // const { data } = await UsersService.PostAd({
       await UsersService.PostAd({
@@ -108,7 +105,8 @@ export const AppProvider = ({ children }) => {
       dispatch({ type: POSTAD_SUCCESS, payload: { status: true } });
       // displayAlert("success", data.message);
       displayAlert("success", "Ads Posted Successfully");
-    } catch (error) {
+    } 
+    catch (error) {
       if (error.response && (error.response.status === 500 || error.response.status === 403)) {
         dispatch({ type: POSTAD_ERROR, payload: { status: true } });
         displayAlert("error", "Not authorized");
