@@ -1,5 +1,5 @@
 
-const schools = [
+const locations = [
     {
         label: "Federal University of Agriculture, Abeokuta",
         value: "FUNAAB",
@@ -43,10 +43,10 @@ const schools = [
 ]
 
 
-export default schools;
-// const schools = [
+export default locations;
+// const locations = [
 //     // {
-//     //     label: "All Schools",
+//     //     label: "All locations",
 //     //     value: "all",
 //     // },
 

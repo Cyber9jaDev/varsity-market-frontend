@@ -14,7 +14,7 @@ import UsersService from "../services/UsersService";
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const category = localStorage.getItem('category');
-const school = localStorage.getItem('school');
+const location = localStorage.getItem('location');
 
 const initialState = {
   isLoading: false,
@@ -23,7 +23,7 @@ const initialState = {
   triggerLogout: false,
   isError: false,
   activeCategory: category ? category : 'all',
-  activeSchool: school ? school : 'all',
+  activeLocation: location ? location : 'all',
   secondUserId: null,
   currentChat: JSON.parse(localStorage.getItem('currentChat')) || null,
   hideChatBox: JSON.parse(localStorage.getItem('hideChatBox')) || false,
@@ -90,20 +90,22 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const postAd = async ({ category, description, price, condition, name, school, images }) => {
+  const postAd = async ({ category, description, price, condition, name, location, images }) => {
     dispatch({ type: POSTAD_BEGINS });
-    if (!category || !description || !price || !condition || !name || !school || images.length < 1) {
-      return displayAlert("error", "Please fill all required fields");
+    if (!category || !description || !price || !condition || !name || !location || images.length < 1) {
+      displayAlert("error", "Please fill all required fields");
+      return dispatch({ type: POSTAD_ERROR, payload: { status: true } });
     }
 
-    console.log(category, description, price, condition, name, school, images);
+    console.log(category, description, price, condition, name, location, images);
+
 
     try {
       // const { data } = await UsersService.PostAd({
-      //   category, description, price, condition, name, school, images, sellerEmail: currentUser.email, sellerId: currentUser.userId,
-      //   createdDate: Date.parse(new Date()), modifiedDate: Date.parse(new Date())
-      // });
-      // dispatch({ type: POSTAD_SUCCESS, payload: { status: true } });
+      await UsersService.PostAd({
+        category, description, price, condition, name, location, images,
+      });
+      dispatch({ type: POSTAD_SUCCESS, payload: { status: true } });
       // displayAlert("success", data.message);
       displayAlert("success", "Ads Posted Successfully");
     } catch (error) {

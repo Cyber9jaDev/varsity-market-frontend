@@ -15,8 +15,17 @@ export default class UsersService{
     return await APICall('/auth/signin', 'POST', payload);
   }
 
-  static PostAd = async (payload) => {
-    return await APICall('/product', 'POST', payload);
+  static PostAd = async ({ category, description, price, condition, name, location, images }) => {
+    console.log(category, description, price, condition, name, location, images);
+    // let formData = new FormData();
+    // formData.append('category', category);
+    // formData.append('description', description);
+    // formData.append('price', price);
+    // formData.append('condition', condition);
+    // formData.append('name', name);
+    // formData.append('location', location);
+    // formData.append("productImages", images);
+    // return await APICall('/product', 'POST', payload);
   }
 
   static getUser = async (userId) => {

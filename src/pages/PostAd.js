@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./styles/post-ad.scss";
-import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { categories, displayAlert, refresh } from "../utilities/utils";
 import FormRow from "../components/FormRow";
 import { useAppContext } from "../contexts/AppContext";
 import { POSTAD_SUCCESS } from "../contexts/Actions";
-import schools from "../utilities/schools";
+import locations from "../utilities/schools";
 
 const PostAd = () => {
   const { postAd, adPostedSuccessfully, adPostFailed, removeUserFromLocalStorage, dispatch, isLoading } = useAppContext();
@@ -15,11 +14,11 @@ const PostAd = () => {
     name: "",
     price: 0,
     description: "",
-    location: "",
-    condition: "",
-    category: "",
-    defaultCategory: { value: 'PHONE', label: 'Mobile Phones' },
-    defaultSchool: { value: "UI", label: "University of Ibadan" }
+    location: "UI",
+    condition: "NEW",
+    category: "CAR",
+    // defaultCategory: { value: 'PHONE', label: 'Mobile Phones' },
+    // defaultSchool: { value: "UI", label: "University of Ibadan" }
   });
   const [images, setImages] = useState([]);
 
@@ -48,7 +47,6 @@ const PostAd = () => {
     return postAd({ ...values, images });
   };
 
-
   const handleChange = (e) => {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -65,23 +63,14 @@ const PostAd = () => {
     };
   }, [adPostedSuccessfully, navigate, dispatch]);
 
-  useEffect(() => {
-    if (adPostFailed) {
-      removeUserFromLocalStorage();
-      refresh();
-    }
-  }, [adPostFailed, removeUserFromLocalStorage]);
+  // useEffect(() => {
+  //   if (adPostFailed) {
+  //     removeUserFromLocalStorage();
+  //     refresh();
+  //   }
+  // }, [adPostFailed, removeUserFromLocalStorage]);
 
-  const style = {
-    input: (provided, state) => ({
-      ...provided,
-      // padding: '30px 5px',
-      height: '35px',
-      outline: state.isSelected ? 'none' : 'none',
-      // border: 'none !important',
-      border: state.isSelected ? 'none' : 'none',
-    }),
-  }
+  
 
   return (
     <section id="post-ad">
@@ -95,22 +84,26 @@ const PostAd = () => {
           <FormRow field="input" handleChange={handleChange} type="text" name="name" label="Title" placeholder="HP, Toyota e.t.c" />
           <div className="form-group">
             <label htmlFor="category"> {" "} Category<span className="asterisk">*</span></label>
-            <Select styles={style} defaultValue={values.defaultCategory} onChange={(e) => setValues((prev) => ({ ...prev, category: e.value }))} isSearchable options={categories.slice(1)} />
+            <select onChange={handleChange} defaultValue={"CAR"} name="category" id="category">
+              {categories.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+            </select>
           </div>
           <FormRow field="input" handleChange={handleChange} name="price" type="number" label="Price(N)" price={values.price} />
           <div className="form-group">
             <label htmlFor="condition">Condition</label>
-            <select name="condition" id="condition">
+            <select defaultValue={"NEW"} onChange={handleChange} name="condition" id="condition">
               <option value="NEW">New</option>
               <option value="USED">Used</option>
               <option value="REFURBISHED">Refurbished</option>
             </select>
           </div>
-          <FormRow field="file" handleChange={handleImage} name="photos" label="Product Photos" />
           <div className="form-group">
-            <label htmlFor="location"> {" "} Location<span className="asterisk">*</span></label>
-            <Select styles={style} isSearchable options={schools.slice(1)} defaultValue={schools[0]} onChange={(e) => setValues((prev) => ({ ...prev, school: e.value }))} />
+            <label htmlFor="location">Location</label>
+            <select onChange={handleChange} defaultValue={"UI"} name="location" id="location">
+              {locations.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+            </select>
           </div>
+          <FormRow field="file" handleChange={handleImage} name="photos" label="Product Photos" />
           <FormRow field="textarea" handleChange={handleChange} id="description" name="description" label="Product Description" placeholder="Briefly describe your product" />
           <div className="submit-btn-wrapper">
             <button disabled={isLoading} className="button">{isLoading ? 'Loading...' : 'Post ad'}</button>
