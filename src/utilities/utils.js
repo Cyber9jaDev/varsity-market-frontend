@@ -3,6 +3,11 @@ import schools from './schools';
 
 export const categories = [
   {
+    value: 'all',
+    icon: 'fa-solid fa-cart-shopping',
+    label: 'All Categories',
+  },  
+  {
     value: 'PHONE',
     icon: 'fa-solid fa-mobile-screen-button',
     label: 'Mobile Phones',

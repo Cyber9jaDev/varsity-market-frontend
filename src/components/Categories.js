@@ -21,7 +21,7 @@ const Categories = () => {
             return (
               <div onClick={() => { updateCategory(category.value); }} key={index} className="category-container">
                 <Link to="/categories" className="category-link">
-                  <div className={`icon-container ${category.value}`}>
+                  <div className={`icon-container ${category.value.toLowerCase()}`}>
                     <i className={`${category.icon} icon`}></i>
                   </div>
                   <h3 className="category-title">{category.label}</h3>
