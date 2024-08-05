@@ -27,18 +27,7 @@ const PostAd = () => {
   const handleImage = (e) => {
     e.preventDefault();
     setImages([...e.target.files ]);
-    // convertImageToBase64(files);
   };
-
-  // const convertImageToBase64 = (files) => {
-  //   files.map((file) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     return (reader.onloadend = () => {
-  //       setImages((prev) => [...prev, reader.result]);
-  //     });
-  //   });
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();

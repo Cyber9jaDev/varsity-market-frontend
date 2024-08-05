@@ -16,9 +16,6 @@ export default class UsersService {
   }
 
   static PostAd = async ({ category, description, price, condition, name, location, images }) => {
-    // console.log(category, description, price, condition, name, location, images);
-    // console.log(typeof images);
-    // console.log(images.length);
     console.log(images);
     let formData = new FormData();
     formData.append('category', category);
@@ -27,12 +24,13 @@ export default class UsersService {
     formData.append('condition', condition);
     formData.append('name', name);
     formData.append('location', location);
-    for(let i = 0; i < images.length; i++){
+
+    for (let i = 0; i < images.length; i++) {
       formData.append('productImages', images[i]);
     }
 
-
     return await APICall('/product', 'POST', formData);
+    
   }
 
   static getUser = async (userId) => {
