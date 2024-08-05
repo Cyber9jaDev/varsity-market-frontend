@@ -4,12 +4,12 @@ import "./styles/product.scss";
 import Pagination from "../components/Pagination";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
-import { categories, findCategory, findCategoryLabel, findSchool } from "../utilities/utils";
+import { categories, displayAlert, findCategory, findCategoryLabel, findSchool } from "../utilities/utils";
 import schools from "../utilities/schools";
 import RangeSlider from "react-range-slider-input";
 import ProductService from "../services/ProductService";
 import { useAppContext } from "../contexts/AppContext";
-import { OPEN_FILTER_MODAL } from "../contexts/Actions";
+import { FIND_BY_CATEGORY_BEGINS, FIND_BY_CATEGORY_ERROR, FIND_BY_CATEGORY_SUCCESS, OPEN_FILTER_MODAL } from "../contexts/Actions";
 import formatNaira from "format-to-naira";
 import sortBy from "../utilities/sortby";
 import Empty from "../components/Empty";
@@ -60,7 +60,7 @@ const Product = () => {
 
   // Get all the filters 
   const getProducts = async () => {
-    // dispatch({ type: FIND_BY_CATEGORY_BEGINS });
+    dispatch({ type: FIND_BY_CATEGORY_BEGINS });
     setHasError(false);
     setIsLoading(true);
     try {
@@ -84,12 +84,12 @@ const Product = () => {
 
       if (data) {
         setProducts([...data]);
-        // dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
+        dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
       }
     } catch (error) {
       setHasError(true);
-      // displayAlert("error", error.response.data.message);
-      // dispatch({ type: FIND_BY_CATEGORY_ERROR });
+      displayAlert("error", error.response.data.message);
+      dispatch({ type: FIND_BY_CATEGORY_ERROR });
     }
     setIsLoading(false);
   };
@@ -125,9 +125,6 @@ const Product = () => {
       localStorage.setItem('searchText', value)
     }
   }
-
-
-  console.log(products);
 
   return (
     <>
