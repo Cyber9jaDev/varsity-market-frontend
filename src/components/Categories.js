@@ -9,6 +9,7 @@ const Categories = () => {
   const { dispatch } = useAppContext();
 
   const updateCategory = (value) => {
+    console.log(value);
     localStorage.setItem("category", value);
     dispatch({ type: SET_ACTIVE_CATEGORY, payload: { value } });
   };
@@ -17,14 +18,14 @@ const Categories = () => {
     <section id="categories-section">
       <div id="categories">
         <div className="categories-wrapper">
-          {categories.map((category, index) => {
+          {categories.map(({ value, label, icon }, index) => {
             return (
-              <div key={index} className="category-container">
-                <Link onClick={() => { updateCategory(category.value) }} to="/products" className="category-link">
-                  <div className={`icon-container ${category.value.toLowerCase()}`}>
-                    <i className={`${category.icon} icon`}></i>
+              <div onClick={() => { updateCategory(value) }} key={index} className="category-container">
+                <Link to="/products" className="category-link">
+                  <div className={`icon-container ${value.toLowerCase()}`}>
+                    <i className={`${icon} icon`}></i>
                   </div>
-                  <h3 className="category-title">{category.label}</h3>
+                  <h3 className="category-title">{label}</h3>
                 </Link>
               </div>
             );

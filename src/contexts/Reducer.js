@@ -89,13 +89,13 @@ export default function reducer(state, { type, payload }) {
   if (type === SET_ACTIVE_CATEGORY) {
     return {
       ...state,
-      activeCategory: payload.value
+      category: payload.value
     }
   }
   if (type === SET_ACTIVE_SCHOOL) {
     return {
       ...state,
-      activeSchool: payload.value
+      location: payload.value
     }
   }
 

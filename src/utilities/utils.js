@@ -3,7 +3,7 @@ import schools from './schools';
 
 export const categories = [
   {
-    value: 'all',
+    value: 'ALL',
     icon: 'fa-solid fa-cart-shopping',
     label: 'All Categories',
   },  

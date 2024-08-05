@@ -24,11 +24,11 @@ const dateHandler = () => {
 const tomorrow = dateHandler();
 
 const Product = () => {
-  const { category } = useParams();
+  // const { category } = useParams();
   const {
     dispatch,
-    activeCategory,
-    activeSchool,
+    location,
+    category,
     filterModalIsOpen
   } = useAppContext();
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -39,8 +39,6 @@ const Product = () => {
     minPrice: 10,
     maxPrice: 9000000,
     sortBy: 'ascending',
-    defaultCategory: { label: "All Ads", value: "all" },
-    defaultSchool: { label: 'All Schools', value: 'all' },
     page: 1,
     pageSize: 4,
     totalPages: null,
@@ -48,7 +46,7 @@ const Product = () => {
     dateTo: localStorage.getItem('dateTo') || tomorrow,
     searchText: localStorage.getItem('searchText') || ''
   });
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
   const defaultSort = { label: 'Price: Low to High', value: 'ascending' };
 
   // Handle screen resize / width
@@ -56,7 +54,7 @@ const Product = () => {
     function handleScreenResize() { setScreenWidth(screenWidth) }
     window.addEventListener('resize', handleScreenResize);
     return () => { window.removeEventListener('resize', handleScreenResize) }
-  }, []);
+  }, [screenWidth]);
 
   // Get all the filters 
   const getProducts = async () => {
@@ -70,8 +68,8 @@ const Product = () => {
       }
 
       const { data } = await ProductService.GetProducts({
-        category: activeCategory,
-        location: activeSchool,
+        category,
+        location,
         minPrice: values.minPrice,
         maxPrice: values.maxPrice,
         page: values.page,
@@ -100,11 +98,11 @@ const Product = () => {
 
   useEffect(() => {
     updateFilter();
-  }, [values.searchText])
+  }, [values.searchText]);
 
   const updateFilter = (value, type) => {
-    if (type === 'school') {
-      return localStorage.setItem("school", value)
+    if (type === 'location') {
+      return localStorage.setItem("location", value)
     }
     else if (type === 'category') {
       return localStorage.setItem("category", value);
@@ -112,7 +110,7 @@ const Product = () => {
     else if (type === 'price') {
       return setValues((prev) => ({ ...prev, minPrice: value[0], maxPrice: value[1] }));
     }
-    else if (type === 'sort') {
+    else if (type === 'sortBy') {
       return setValues((prev) => ({ ...prev, sortBy: value }));
     }
     else if (type === 'dateTo') {
@@ -126,6 +124,9 @@ const Product = () => {
     }
   }
 
+  console.log(values);
+  console.log(category);
+
   return (
     <>
       <section className="container-fluid" id="products">
@@ -134,7 +135,7 @@ const Product = () => {
             <div className="border d-block p-2">
               <p className="category-label d-inline-block m-0 me-2 fs-5"> Categories </p>
               <p className="d-inline-block m-0 me-2 fs-5"> / </p>
-              <p className="category-label d-inline-block m-0 fs-5">{findCategoryLabel(activeCategory, values)} </p>
+              <p className="category-label d-inline-block m-0 fs-5">{findCategoryLabel(category, values)} </p>
             </div>
           }
         </div>
@@ -150,6 +151,8 @@ const Product = () => {
                 </div>
               </div>
               }
+
+              {/* Filter form */}
 
               <form className="form" onSubmit={getProducts}>
                 <div className="container">
@@ -177,19 +180,26 @@ const Product = () => {
 
                     <div className="col-12 my-3">
                       <div className="form-group">
-                        <label htmlFor="school"> Select your school to see local ads</label>
-                        <Select isSearchable options={schools} defaultValue={() => findSchool(activeSchool, values)} onChange={(e) => { updateFilter(e.value, 'school') }} />
+                        <label htmlFor="location"> Select your school to see local ads</label>
+                        <select onChange={(e) => { updateFilter(e.value, 'location') }} name="location" id="location" defaultValue={values.location} className="w-100 py-2 border-0">
+                          {schools.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+                        </select>
                       </div>
                     </div>
                     <div className="col-12 my-3">
-                      <div className="form-group">
-                        <label htmlFor="school">Browse Categories</label>
-                        <Select isSearchable options={categories} defaultValue={() => findCategory(activeCategory)} onChange={(e) => { updateFilter(e.value, 'category') }} />
+                      <div className="form-group select">
+                        <label htmlFor="category">Browse Categories</label>
+                        <select onChange={(e) => { updateFilter(e.value, 'category') }} name="category" id="category" defaultValue={category} className="w-100 py-2 border-0">
+                          {categories.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+                        </select>
                       </div>
                     </div>
                     <div className="col-12 my-3">
                       <label className="d-block"> Sort By <span> :</span>{" "} </label>
-                      <Select defaultValue={defaultSort} options={sortBy} onChange={(e) => { updateFilter(e.value, 'sort') }} />
+                      <select onChange={(e) => { updateFilter(e.value, 'sortBy') }} name="sortBy" id="sortBy" defaultValue={"ascending"} className="w-100 py-2 border-0">
+                        {sortBy.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+                      </select>
+                      {/* <Select defaultValue={defaultSort} options={sortBy} onChange={(e) => { updateFilter(e.value, 'sortBy') }} /> */}
                     </div>
                     <div className="col-12 my-3">
                       <div className="form-group">
