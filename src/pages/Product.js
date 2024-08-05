@@ -24,23 +24,32 @@ const dateHandler = () => {
 const tomorrow = dateHandler();
 
 const Product = () => {
-  const defaultSort = { label: 'Price: Low to High', value: 'ascending' };
   const { category } = useParams();
-  const { dispatch, activeCategory, activeSchool, filterModalIsOpen } = useAppContext();
+  const {
+    dispatch,
+    activeCategory,
+    activeSchool,
+    filterModalIsOpen
+  } = useAppContext();
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState('list');
   const [values, setValues] = useState({
-    minPrice: 10, maxPrice: 9000000,
-    products: [], sortBy: 'ascending',
+    minPrice: 10,
+    maxPrice: 9000000,
+    sortBy: 'ascending',
     defaultCategory: { label: "All Ads", value: "all" },
     defaultSchool: { label: 'All Schools', value: 'all' },
-    page: 1, pageSize: 4, totalPages: null,
+    page: 1,
+    pageSize: 4,
+    totalPages: null,
     dateFrom: localStorage.getItem('dateFrom') || '2020-03-01',
     dateTo: localStorage.getItem('dateTo') || tomorrow,
     searchText: localStorage.getItem('searchText') || ''
   });
+  const [products, setProducts] = useState([])
+  const defaultSort = { label: 'Price: Low to High', value: 'ascending' };
 
   // Handle screen resize / width
   useEffect(() => {
@@ -59,16 +68,22 @@ const Product = () => {
       if (screenWidth < 992 && filterModalIsOpen === true) {
         dispatch({ type: OPEN_FILTER_MODAL, payload: { value: false } });
       }
+
       const { data } = await ProductService.GetProducts({
-        category: activeCategory, school: activeSchool, minPrice: values.minPrice, maxPrice: values.maxPrice,
-        page: values.page, pageSize: values.pageSize, sortBy: values.sortBy,
+        category: activeCategory,
+        location: activeSchool,
+        minPrice: values.minPrice,
+        maxPrice: values.maxPrice,
+        page: values.page,
+        pageSize: values.pageSize,
+        sortBy: values.sortBy,
         dateFrom: Date.parse(values.dateFrom),
         dateTo: Date.parse(values.dateTo),
         searchText: values.searchText
       });
 
       if (data) {
-        setValues((prev) => ({ ...prev, products: data.products, totalPages: data.totalPages }));
+        setProducts([...data]);
         // dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
       }
     } catch (error) {
@@ -110,6 +125,9 @@ const Product = () => {
       localStorage.setItem('searchText', value)
     }
   }
+
+
+  console.log(products);
 
   return (
     <>
@@ -228,7 +246,7 @@ const Product = () => {
                 {isLoading === true ? <Loading /> : isLoading === false && hasError === true ? <Error /> :
                   isLoading === false && hasError === false && values.products?.length === 0 ? <Empty /> : <div className="container mt-3">
                     <div className="row products-container">
-                      {values.products?.map(product => <ProductCard view={view} category={category} key={product._id} {...product} />)}
+                      {products?.map(product => <ProductCard view={view} category={category} key={product.id} {...product} />)}
                     </div>
                   </div>
                 }

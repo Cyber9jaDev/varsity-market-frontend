@@ -22,7 +22,7 @@ const RouterLinks = () => {
           <Route path='about-us' exact element={ <About/> }/>
           <Route exact path='profile' element={<PrivateRoute><Profile/></PrivateRoute>} />
           <Route path=':category/:id' exact element={<ProductPreview/>}/>
-          <Route path='categories' exact element={<PrivateRoute> <Product/></PrivateRoute> }/>
+          <Route path='products' exact element={<PrivateRoute> <Product/></PrivateRoute> }/>
         </Route>
         <Route path='/register' exact element={ <Register/> }/>
         <Route path='/login' exact element={ <Login/> }/>
