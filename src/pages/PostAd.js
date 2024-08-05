@@ -26,7 +26,7 @@ const PostAd = () => {
 
   const handleImage = (e) => {
     e.preventDefault();
-    setImages([...e.target.files ]);
+    setImages([...e.target.files]);
   };
 
   const handleSubmit = (e) => {
@@ -52,15 +52,6 @@ const PostAd = () => {
       dispatch({ type: POSTAD_SUCCESS, payload: { status: false } });
     };
   }, [adPostedSuccessfully, navigate, dispatch]);
-
-  // useEffect(() => {
-  //   if (adPostFailed) {
-  //     removeUserFromLocalStorage();
-  //     refresh();
-  //   }
-  // }, [adPostFailed, removeUserFromLocalStorage]);
-
-  // console.log(images);
 
   return (
     <section id="post-ad">

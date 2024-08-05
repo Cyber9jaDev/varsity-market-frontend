@@ -15,6 +15,7 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 20px;
+
   }
 
   .category-container{
@@ -55,8 +56,8 @@
 
   // .icon{ width: 50px; height: 50px; font-size: 2rem; }
   .icon{ font-size: 2.5rem; }
-  .all{ background-color: lightcoral; }
-  .mobile{ background-color: lightseagreen; }
+  .all{ background-color: lightcoral ; }
+  .mobile{ background-color: lightseagreen ; }
   .computer { background:#ff9e29; }
   .car { background:lightsteelblue; }
   .bike { background:#15c01c; }
