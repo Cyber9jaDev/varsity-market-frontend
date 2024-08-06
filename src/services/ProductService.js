@@ -2,15 +2,14 @@ import APICall from "../utilities/APICall";
 
 export default class ProductService {
 
-  static GetProducts = async ({ category, school, minPrice, maxPrice, page, pageSize, sortBy, dateFrom, dateTo, searchText }) => {
-    // let url = `/api/category/${category}/${school}?page=${page}&pageSize=${pageSize}&dateFrom=${dateFrom}&dateTo=${dateTo}`;
-    // if(minPrice){ url = `${url}&minPrice=${minPrice}` } 
-    // if(maxPrice){ url = `${url}&maxPrice=${maxPrice}` }
-    // if(sortBy){ url = `${url}&sortBy=${sortBy}`}
-    // if(searchText){ url=`${url}&searchText=${searchText}`}
+  static GetProducts = async (category, location, { price, page, pageSize, sortBy, dateFrom, dateTo, searchText }) => {
+    const minPrice = price.min;
+    const maxPrice = price.max;
+    const dateFrom_ = Date.parse(dateFrom);
+    const dateTo_ = Date.parse(dateTo);
 
-    return await APICall('/product', 'GET');
-    // return await APICall(url, 'GET');
+    let url =`/product?page=${page}&category=${category}&location=${location}&pageSize=${pageSize}&dateFrom=${dateFrom_}&dateTo=${dateTo_}&sortBy=${sortBy}&searchText=${searchText}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+    return await APICall(url, 'GET');
   }
 
   static ProductPreview = async (category, id) => {

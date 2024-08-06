@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import "./styles/product.scss";
 import Pagination from "../components/Pagination";
-import { categories, displayAlert, findCategory, findCategoryLabel, findSchool } from "../utilities/utils";
+import { categories, displayAlert, findCategoryLabel } from "../utilities/utils";
 import schools from "../utilities/schools";
 import RangeSlider from "react-range-slider-input";
 import ProductService from "../services/ProductService";
@@ -63,24 +63,14 @@ const Product = () => {
         dispatch({ type: OPEN_FILTER_MODAL, payload: { value: false } });
       }
 
-      const { data } = await ProductService.GetProducts({
-        category,
-        location,
-        minPrice: values.minPrice,
-        maxPrice: values.maxPrice,
-        page: values.page,
-        pageSize: values.pageSize,
-        sortBy: values.sortBy,
-        dateFrom: Date.parse(values.dateFrom),
-        dateTo: Date.parse(values.dateTo),
-        searchText: values.searchText
-      });
-
+      const { data } = await ProductService.GetProducts(category, location, values)
+      
       if (data) {
         setProducts([...data]);
         dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
       }
-    } catch (error) {
+    } 
+    catch (error) {
       setHasError(true);
       displayAlert("error", error.response.data.message);
       dispatch({ type: FIND_BY_CATEGORY_ERROR });
