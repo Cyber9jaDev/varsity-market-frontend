@@ -20,8 +20,8 @@ const Categories = () => {
         <div className="categories-wrapper">
           {categories.map(({ value, label, icon }, index) => {
             return (
-              <div onClick={() => { updateCategory(value) }} key={index} className="category-container">
-                <Link to="/products" className="category-link">
+              <div key={index} className="category-container">
+                <Link onClick={() => { updateCategory(value) }} to="/products" className="category-link">
                   <div className={`icon-container ${value.toLowerCase()}`}>
                     <i className={`${icon} icon`}></i>
                   </div>
