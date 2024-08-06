@@ -99,6 +99,17 @@ export const convertDate = (date) => {
   };
 };
 
+export const orderBy = [
+  {
+    label: 'Price: Low to High',
+    value: 'asc',
+  },
+  {
+    label: 'Price: High to Low',
+    value: 'desc'
+  }
+]
+
 export const displayAlert = (alertType, alertText) => {
   if (alertType === 'success') toast.success(alertText);
   else if (alertType === 'error') toast.error(alertText);

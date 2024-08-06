@@ -23,7 +23,7 @@ const initialState = {
   triggerLogout: false,
   isError: false,
   category: (category !== 'undefined' && category !== null) ? category : 'ALL',
-  location: (location !== 'undefined' && location !== null) ? location : 'UI',
+  location: (location !== 'undefined' && location !== null) ? location : 'ALL',
   secondUserId: null,
   currentChat: JSON.parse(localStorage.getItem('currentChat')) || null,
   hideChatBox: JSON.parse(localStorage.getItem('hideChatBox')) || false,

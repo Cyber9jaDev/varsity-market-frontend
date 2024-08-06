@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import "./styles/product.scss";
 import Pagination from "../components/Pagination";
-import { categories, displayAlert, findCategoryLabel } from "../utilities/utils";
+import { categories, displayAlert, findCategoryLabel, orderBy } from "../utilities/utils";
 import schools from "../utilities/schools";
 import RangeSlider from "react-range-slider-input";
 import ProductService from "../services/ProductService";
 import { useAppContext } from "../contexts/AppContext";
 import { FIND_BY_CATEGORY_BEGINS, FIND_BY_CATEGORY_ERROR, FIND_BY_CATEGORY_SUCCESS, OPEN_FILTER_MODAL } from "../contexts/Actions";
 import formatNaira from "format-to-naira";
-import sortByOptions from "../utilities/sortby";
 import Empty from "../components/Empty";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
@@ -35,9 +34,9 @@ const Product = () => {
   const [view, setView] = useState('list');
   const [values, setValues] = useState({
     price: (price !== null && price !== 'undefined') ? { min: price[0], max: price[1] } : { min: 10, max: 9000000 },
-    sortBy: localStorage.getItem("sortBy") || 'ascending',
+    orderBy: localStorage.getItem("orderBy") || 'asc',
     page: 1,
-    pageSize: 4,
+    limit: 4,
     totalPages: null,
     dateFrom: localStorage.getItem('dateFrom') || '2020-03-01',
     dateTo: localStorage.getItem('dateTo') || tomorrow,
@@ -64,7 +63,7 @@ const Product = () => {
       }
 
       const { data } = await ProductService.GetProducts(category, location, values)
-      
+
       if (data) {
         setProducts([...data]);
         dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
@@ -97,8 +96,8 @@ const Product = () => {
       localStorage.setItem('price', value);
       return setValues((prev) => ({ ...prev, price: { min: value[0], max: value[1] } }));
     }
-    else if (type === 'sortBy') {
-      localStorage.setItem('sortBy', value)
+    else if (type === 'orderBy') {
+      localStorage.setItem('orderBy', value)
     }
     else if (type === 'dateTo') {
       localStorage.setItem('dateTo', value)
@@ -177,9 +176,9 @@ const Product = () => {
                     </div>
                   </div>
                   <div className="col-12 my-3">
-                    <label className="d-block"> Sort By <span> :</span>{" "} </label>
-                    <select onChange={(e) => { updateFilter(e.target.value, 'sortBy') }} name="sortBy" id="sortBy" defaultValue={values.sortBy} className="w-100 py-2 border-0">
-                      {sortByOptions.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
+                    <label className="d-block"> Order By <span> :</span>{" "} </label>
+                    <select onChange={(e) => { updateFilter(e.target.value, 'orderBy') }} name="orderBy" id="orderBy" defaultValue={values.orderBy} className="w-100 py-2 border-0">
+                      {orderBy.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
                     </select>
                   </div>
                   <div className="col-12 my-3">

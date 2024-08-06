@@ -1,6 +1,10 @@
 
 const locations = [
     {
+        label: "All Universities",
+        value: "ALL",
+    },
+    {
         label: "Federal University of Agriculture, Abeokuta",
         value: "FUNAAB",
     },

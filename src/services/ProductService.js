@@ -2,13 +2,10 @@ import APICall from "../utilities/APICall";
 
 export default class ProductService {
 
-  static GetProducts = async (category, location, { price, page, pageSize, sortBy, dateFrom, dateTo, searchText }) => {
-    const minPrice = price.min;
-    const maxPrice = price.max;
-    const dateFrom_ = Date.parse(dateFrom);
-    const dateTo_ = Date.parse(dateTo);
+  static GetProducts = async (category, location, { price, page, limit, orderBy, dateFrom, dateTo, searchText }) => {
 
-    let url =`/product?page=${page}&category=${category}&location=${location}&pageSize=${pageSize}&dateFrom=${dateFrom_}&dateTo=${dateTo_}&sortBy=${sortBy}&searchText=${searchText}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+    console.log(orderBy);
+    let url = `/product?page=${page}&limit=${limit}&category=${category}&location=${location}&dateFrom=${Date.parse(dateFrom)}&dateTo=${Date.parse(dateTo)}&orderBy=${orderBy}&searchText=${searchText}&minPrice=${price.min}&maxPrice=${price.max}`;
     return await APICall(url, 'GET');
   }
 
