@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import "./styles/product.scss";
 import Pagination from "../components/Pagination";
-import { useParams } from "react-router-dom";
-import Select from "react-select";
 import { categories, displayAlert, findCategory, findCategoryLabel, findSchool } from "../utilities/utils";
 import schools from "../utilities/schools";
 import RangeSlider from "react-range-slider-input";
@@ -22,10 +20,9 @@ const dateHandler = () => {
   return today.toISOString().split('T')[0];
 }
 const tomorrow = dateHandler();
-const sortBy = localStorage.getItem("sortBy");
+const price = localStorage.getItem("price").split(",");
 
 const Product = () => {
-  // const { category } = useParams();
   const {
     dispatch,
     location,
@@ -37,9 +34,8 @@ const Product = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState('list');
   const [values, setValues] = useState({
-    minPrice: 10,
-    maxPrice: 9000000,
-    sortBy: (sortBy !== null && sortBy !== 'undefined ') ? sortBy : 'ascending',
+    price: (price !== null && price !== 'undefined') ? { min: price[0], max: price[1] } : { min: 10, max: 9000000 },
+    sortBy: localStorage.getItem("sortBy") || 'ascending',
     page: 1,
     pageSize: 4,
     totalPages: null,
@@ -98,7 +94,7 @@ const Product = () => {
 
   useEffect(() => {
     updateFilter();
-  }, [values.searchText, values.sortBy]);
+  }, [values.searchText]);
 
   const updateFilter = (value, type) => {
     if (type === 'location') {
@@ -108,8 +104,8 @@ const Product = () => {
       return localStorage.setItem("category", value);
     }
     else if (type === 'price') {
-      localStorage.setItem('price', value)
-      // return setValues((prev) => ({ ...prev, minPrice: value[0], maxPrice: value[1] }));
+      localStorage.setItem('price', value);
+      return setValues((prev) => ({ ...prev, price: { min: value[0], max: value[1] } }));
     }
     else if (type === 'sortBy') {
       localStorage.setItem('sortBy', value)
@@ -124,10 +120,6 @@ const Product = () => {
       localStorage.setItem('searchText', value)
     }
   }
-
-  console.log(values);
-  console.log(category);
-  console.log(location);
 
   return (
     <section className="container-fluid" id="products">
@@ -203,12 +195,12 @@ const Product = () => {
                   <div className="col-12 my-3">
                     <div className="form-group">
                       <label htmlFor="price" className="w-100 d-flex">
-                        <span style={{ width: '40%', fontWeight: '600' }}>{formatNaira(values.minPrice)}</span>{" "}
+                        <span style={{ width: '40%', fontWeight: '600' }}>{formatNaira(values.price.min)}</span>{" "}
                         <span className="mx-2 text-center" style={{ width: '10%' }}> - </span>
-                        <span className="text-end" style={{ width: '40%', fontWeight: '600' }}>{formatNaira(values.maxPrice)}</span>{" "}
+                        <span className="text-end" style={{ width: '40%', fontWeight: '600' }}>{formatNaira(values.price.max)}</span>{" "}
                       </label>
                       <div className="mt-3 range-slider-wrapper">
-                        <RangeSlider id='price' className='range-slider' step={20000} onInput={(e) => updateFilter(e, 'price')} defaultValue={[values.minPrice, values.maxPrice]} min={0} max={9000000} />
+                        <RangeSlider id='price' className='range-slider' step={20000} onInput={(e) => updateFilter(e, 'price')} defaultValue={[values.price.min, values.price.max]} min={1} max={10000000} />
                       </div>
                     </div>
                   </div>
