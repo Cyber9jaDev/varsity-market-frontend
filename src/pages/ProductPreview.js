@@ -16,17 +16,18 @@ const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 const ProductPreview = () => {
   const { category, id } = useParams();
-  const [ isLoading, setIsLoading ] = useState(true);
-  const [ product, setProduct ] = useState(null);
-  const [ hasError, setHasError ] = useState(false);
-  const [ images, setImages ] = useState([]);
-  const [ currentIndex, setCurrentIndex ] = useState(0);
-  const { dispatch } =  useAppContext();
+  const [isLoading, setIsLoading] = useState(true);
+  const [product, setProduct] = useState(null);
+  const [hasError, setHasError] = useState(false);
+  const [images, setImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { dispatch } = useAppContext();
   const navigate = useNavigate();
 
+
   const findSchool = (value) => {
-    const school = schools.find(school => school.value === value );
-    if(school){
+    const school = schools.find(school => school.value === value);
+    if (school) {
       return school.label
     }
     return 'University of Ibadan';
@@ -35,15 +36,17 @@ const ProductPreview = () => {
   useEffect(() => {
     const getProduct = async () => {
       setIsLoading(true);
-      setHasError(false)
+      setHasError(false);
       try {
-        const { data } = await ProductService.ProductPreview(category, id);
+        const { data } = await ProductService.ProductPreview(id);
+        console.log(data);
         setProduct(data);
         setImages(data.images);
-      } 
-      catch (error) { 
-        setHasError(true) } 
-        setIsLoading(false);
+      }
+      catch (error) {
+        setHasError(true)
+      }
+      setIsLoading(false);
     }
 
     getProduct();
@@ -52,12 +55,12 @@ const ProductPreview = () => {
 
   useEffect(() => {
     const timerId = setInterval(() => {
-      if(currentIndex === images.length - 1) setCurrentIndex(0)  
+      if (currentIndex === images.length - 1) setCurrentIndex(0)
       else setCurrentIndex(current => current + 1);
     }, 5000);
 
     return () => clearInterval(timerId);
-    
+
   }, [currentIndex, images.length]);
 
   const getSecondUserId = (users) => {
@@ -68,36 +71,36 @@ const ProductPreview = () => {
   const openChatModal = async () => {
     console.log(product);
     // Ensure user cannot initiate a chat with their advert
-    if( product === null || currentUser.userId === product.sellerId){ return }
-    
+    if (product === null || currentUser.userId === product.sellerId) { return }
+
     try {
-      const { data:chat } = await ChatService.initiateChat({ firstUser:currentUser.userId, secondUser: product?.sellerId});
-      if(chat){
+      const { data: chat } = await ChatService.initiateChat({ firstUser: currentUser.userId, secondUser: product?.sellerId });
+      if (chat) {
         const secondUserId = getSecondUserId(chat?.users);
         localStorage.setItem('currentChat', JSON.stringify(chat));
-        dispatch({ type: SET_CURRENT_CHAT, payload: { chat, receiverId: secondUserId }});
+        dispatch({ type: SET_CURRENT_CHAT, payload: { chat, receiverId: secondUserId } });
         // const { data:secondUserData } = await UsersService.getUser(secondUserId);
-        const { data:secondUserData } = await axios.get(`http://localhost:3000/api/user/${secondUserId}`);
+        const { data: secondUserData } = await axios.get(`http://localhost:3000/api/user/${secondUserId}`);
         localStorage.setItem('secondUserData', JSON.stringify(secondUserData));
         localStorage.setItem('hideChatBox', JSON.stringify(false));
-        dispatch({ type: HIDE_CHAT_BOX, payload: {value: false}});
+        dispatch({ type: HIDE_CHAT_BOX, payload: { value: false } });
         navigate('/chat');
       }
     } catch (error) {
-        return error;
+      return error;
     }
   }
-  
-  return ( 
+
+  return (
     <section id="product-preview">
-      { isLoading ? <Loading /> : !isLoading && hasError === true ? <Error /> : 
+      {isLoading ? <Loading /> : !isLoading && hasError === true ? <Error /> :
         <div className="container product-preview-wrapper border">
-        <div className="left">
-          <div className="container product-wrapper">
-              
+          <div className="left">
+            <div className="container product-wrapper">
+
               <div className="address-container">
                 <i className="fa-solid fa-location-dot location-icon"></i>
-                {product.city && <p className="city">{product.city}</p>}
+                {product.location && <p className="city">{product.location}</p>}
                 <div className="v-bar"></div>
                 {product.createdAt && <p className="date">{moment(product.createdAt).format('dddd, Do MMM YYYY')}</p>}
               </div>
@@ -109,93 +112,93 @@ const ProductPreview = () => {
 
                 <div className="lg-product-img-wrapper">
                   <div className="lg-product-img-container">
-                    <img className='lg-product-img' src={!isLoading && images[currentIndex].url} alt="product-lg-img" />
+                    <img className='lg-product-img' src={!isLoading && images[currentIndex].secure_url} alt="product-lg-img" />
                   </div>
                 </div>
 
                 <div className="icon-container icon-right-container">
-                  <i onClick={() => setCurrentIndex( current => currentIndex === images.length - 1 ? current : current + 1 ) } className="fa-solid fa-circle-chevron-right icon"></i>
+                  <i onClick={() => setCurrentIndex(current => currentIndex === images.length - 1 ? current : current + 1)} className="fa-solid fa-circle-chevron-right icon"></i>
                 </div>
               </div>
 
               <div className="sm-product-img-wrapper mb-3">
-                { images?.map((image, index) => {
-                    return(
-                      <div key={index} className="sm-product-img-container">
-                        <img onMouseEnter={() => setCurrentIndex(index)} className='sm-product-img' src={image.url} alt="product-sm-img" />
-                      </div>
-                    )
+                {images?.map((image, index) => {
+                  return (
+                    <div key={index} className="sm-product-img-container">
+                      <img onMouseEnter={() => setCurrentIndex(index)} className='sm-product-img' src={image.secure_url} alt="product-sm-img" />
+                    </div>
+                  )
                 })}
               </div>
-              
-              { product.name && 
+
+              {product.name &&
                 <details open={true} className="name-container">
                   <summary className='name-text fs-5'>Product</summary>
                   <p className="name">{product.name}</p>
-                </details> 
+                </details>
               }
 
-              { product.description && 
+              {product.description &&
                 <details open={true} className="description-container">
                   <summary className='email-text fs-5'>Seller Email</summary>
                   <p className="email">{product.sellerEmail}</p>
-                </details> 
+                </details>
               }
-              { product.description && 
+              {product.description &&
                 <details open={true} className="description-container">
                   <summary className='description-text fs-5'>Description</summary>
                   <p className="description">{product.description}</p>
-                </details> 
+                </details>
               }
 
-              { product.school && 
+              {product.school &&
                 <details open={true} className="school-container">
                   <summary className='school-text  fs-5'>School</summary>
                   <p className="school">{findSchool(product.school)}</p>
-                </details> 
+                </details>
               }
-              
-          </div>
-        </div>
 
-        <div className="right">
-          <div className="price-box-container">
-            <div className="clip"> </div>
-            <div className="price-box">
-              
-              {product.price && <div className='box-row'>
+            </div>
+          </div>
+
+          <div className="right">
+            <div className="price-box-container">
+              <div className="clip"> </div>
+              <div className="price-box">
+
+                {product.price && <div className='box-row'>
                   <p className="price-text">Price</p>
                   <p className="price">{formatNaira(product.price)}</p>
                 </div>
-              }
-              {product.condition && <div className='box-row'>
+                }
+                {product.condition && <div className='box-row'>
                   <p className="condition-text">Condition</p>
                   <p className="condition">{product.condition}</p>
                 </div>
-              }
+                }
+              </div>
             </div>
-          </div>
-          <div className="ad-block">
-            <h5>Interested in this ad?</h5>
-            <p className='contact-text'>Contact the seller!</p>
-            <div className="contact-details-container">
-              <a href='tel:08062128170' className="contact-details">
-                <div className="phone-icon-container">
-                  <i className="fa-solid fa-phone-flip phone-icon"></i>
-                </div>
-                <span className='call-text'>Call</span>
-              </a>
-              <span onClick={openChatModal} className="contact-details">
-                <div className="message-icon-container">
-                <i className="fa-solid fa-message message-icon"></i>
-                </div>
-                <span className='chat-text'>Chat</span>
-              </span>
+            <div className="ad-block">
+              <h5>Interested in this ad?</h5>
+              <p className='contact-text'>Contact the seller!</p>
+              <div className="contact-details-container">
+                <a href='tel:08062128170' className="contact-details">
+                  <div className="phone-icon-container">
+                    <i className="fa-solid fa-phone-flip phone-icon"></i>
+                  </div>
+                  <span className='call-text'>Call</span>
+                </a>
+                <span onClick={openChatModal} className="contact-details">
+                  <div className="message-icon-container">
+                    <i className="fa-solid fa-message message-icon"></i>
+                  </div>
+                  <span className='chat-text'>Chat</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>   
-      }         
+      }
     </section>
   );
 }

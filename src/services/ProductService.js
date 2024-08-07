@@ -7,9 +7,8 @@ export default class ProductService {
     return await APICall(url, 'GET');
   }
 
-  static ProductPreview = async (category, id) => {
-    const url = `/api/${category}/${id}`;
-    return await APICall(url, 'GET')
+  static ProductPreview = async (id) => {
+    return await APICall(`/product/${id}`, 'GET')
   }
 
 
