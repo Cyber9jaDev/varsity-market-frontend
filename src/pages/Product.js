@@ -19,7 +19,7 @@ const dateHandler = () => {
   return today.toISOString().split('T')[0];
 }
 const tomorrow = dateHandler();
-const price = localStorage.getItem("price").split(",");
+const price = localStorage.getItem("price");
 
 const Product = () => {
   const {
@@ -33,10 +33,10 @@ const Product = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState('list');
   const [values, setValues] = useState({
-    price: (price !== null && price !== 'undefined') ? { min: price[0], max: price[1] } : { min: 10, max: 9000000 },
+    price: (price !== null && price !== 'undefined') ? { min: price.split(',')[0], max: price.split(',')[1] } : { min: 10, max: 9000000 },
     orderBy: localStorage.getItem("orderBy") || 'asc',
     page: 1,
-    limit: 4,
+    limit: 10,
     totalPages: null,
     dateFrom: localStorage.getItem('dateFrom') || '2020-03-01',
     dateTo: localStorage.getItem('dateTo') || tomorrow,
@@ -65,10 +65,12 @@ const Product = () => {
       const { data } = await ProductService.GetProducts(category, location, values)
 
       if (data) {
-        setProducts([...data]);
+        setProducts([...data?.products]);
+        setValues(prev => ({ ...prev, totalPages: data?.totalPages }))
         dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
       }
-    } 
+      setHasError(false);
+    }
     catch (error) {
       setHasError(true);
       displayAlert("error", error.response.data.message);
@@ -238,7 +240,7 @@ const Product = () => {
                 </div>
               }
               {/* Pagination */}
-              {hasError === false && values.products?.length >= 1 &&
+              {hasError === false && products?.length >= 1 &&
                 <div className="container mt-3">
                   <Pagination {...values} setValues={setValues} />
                 </div>
