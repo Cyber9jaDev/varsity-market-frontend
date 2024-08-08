@@ -12,16 +12,15 @@ import { useAppContext } from '../contexts/AppContext';
 import { HIDE_CHAT_BOX, SET_CURRENT_CHAT } from '../contexts/Actions';
 import axios from 'axios';
 
-const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 const ProductPreview = () => {
-  const { category, id } = useParams();
+  const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [hasError, setHasError] = useState(false);
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { dispatch } = useAppContext();
+  const { dispatch, currentUser } = useAppContext();
   const navigate = useNavigate();
 
 
@@ -39,19 +38,18 @@ const ProductPreview = () => {
       setHasError(false);
       try {
         const { data } = await ProductService.ProductPreview(id);
-        console.log(data);
         setProduct(data);
         setImages(data.images);
       }
       catch (error) {
-        setHasError(true)
+        setHasError(true);
       }
       setIsLoading(false);
     }
 
     getProduct();
 
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -64,17 +62,17 @@ const ProductPreview = () => {
   }, [currentIndex, images.length]);
 
   const getSecondUserId = (users) => {
-    const secondUserId = users.find(id => id !== currentUser.userId);
+    const secondUserId = users.find(id => id !== currentUser.id);
     return secondUserId;
   }
 
   const openChatModal = async () => {
     console.log(product);
     // Ensure user cannot initiate a chat with their advert
-    if (product === null || currentUser.userId === product.sellerId) { return }
+    if (product === null || currentUser.id === product.sellerId) { return }
 
     try {
-      const { data: chat } = await ChatService.initiateChat({ firstUser: currentUser.userId, secondUser: product?.sellerId });
+      const { data: chat } = await ChatService.initiateChat({ firstUser: currentUser.id, secondUser: product?.sellerId });
       if (chat) {
         const secondUserId = getSecondUserId(chat?.users);
         localStorage.setItem('currentChat', JSON.stringify(chat));
@@ -141,7 +139,7 @@ const ProductPreview = () => {
               {product.description &&
                 <details open={true} className="description-container">
                   <summary className='email-text fs-5'>Seller Email</summary>
-                  <p className="email">{product.sellerEmail}</p>
+                  <p className="email">{product?.seller?.email}</p>
                 </details>
               }
               {product.description &&

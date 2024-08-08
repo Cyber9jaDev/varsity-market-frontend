@@ -98,14 +98,12 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      // const { data } = await UsersService.PostAd({
       await UsersService.PostAd({
         category, description, price, condition, name, location, images,
       });
       dispatch({ type: POSTAD_SUCCESS, payload: { status: true } });
-      // displayAlert("success", data.message);
       displayAlert("success", "Ads Posted Successfully");
-    } 
+    }
     catch (error) {
       if (error.response && (error.response.status === 500 || error.response.status === 403)) {
         dispatch({ type: POSTAD_ERROR, payload: { status: true } });
