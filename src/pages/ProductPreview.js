@@ -61,9 +61,9 @@ const ProductPreview = () => {
 
   }, [currentIndex, images.length]);
 
-  const getSecondUserId = (users) => {
-    const secondUserId = users.find(id => id !== currentUser.id);
-    return secondUserId;
+  const getSecondParticipantId = (participants) => {
+    const participant = participants.find(participant => participant.participantId !== currentUser.id);
+    return participant.participantId;
   }
 
   const openChatModal = async () => {
@@ -72,17 +72,28 @@ const ProductPreview = () => {
     if (product === null || currentUser.id === product.sellerId) { return }
 
     try {
-      const { data: chat } = await ChatService.initiateChat({ firstUser: currentUser.id, secondUser: product?.sellerId });
+      const { data: chat } = await ChatService.initiateChat({
+        user1: currentUser.id,
+        user2: product?.sellerId
+      });
+
+
       if (chat) {
-        const secondUserId = getSecondUserId(chat?.users);
+        const second_participant_id = getSecondParticipantId(chat?.participants);
+
         localStorage.setItem('currentChat', JSON.stringify(chat));
-        dispatch({ type: SET_CURRENT_CHAT, payload: { chat, receiverId: secondUserId } });
+
+        dispatch({
+          type: SET_CURRENT_CHAT,
+          payload: { chat, receiverId: second_participant_id }
+        });
+
         // const { data:secondUserData } = await UsersService.getUser(secondUserId);
-        const { data: secondUserData } = await axios.get(`http://localhost:3000/api/user/${secondUserId}`);
-        localStorage.setItem('secondUserData', JSON.stringify(secondUserData));
-        localStorage.setItem('hideChatBox', JSON.stringify(false));
-        dispatch({ type: HIDE_CHAT_BOX, payload: { value: false } });
-        navigate('/chat');
+        // const { data: secondUserData } = await axios.get(`http://localhost:3000/api/user/${secondUserId}`);
+        // localStorage.setItem('secondUserData', JSON.stringify(secondUserData));
+        // localStorage.setItem('hideChatBox', JSON.stringify(false));
+        // dispatch({ type: HIDE_CHAT_BOX, payload: { value: false } });
+        // navigate('/chat');
       }
     } catch (error) {
       return error;
