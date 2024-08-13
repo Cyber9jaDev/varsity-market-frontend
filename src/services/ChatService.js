@@ -2,7 +2,7 @@ import APICall from "../utilities/APICall"
 
 export default class ChatService {
   static getUserChats = async (userId) => {
-    return APICall(`/api/chat/find/${userId}`, 'GET');
+    return APICall(`/chat/${userId}`, 'GET');
   }
 
   static getMessages = async (chatId) => {
@@ -15,6 +15,10 @@ export default class ChatService {
 
   static initiateChat = async (body) => {
     return APICall('/chat/initiate-chat', 'POST', body)
+  }
+
+  static secondChatParticipant = async(secondParticipantId) => {
+    return APICall(`/auth/secondParticipantId/${secondParticipantId}`, "GET")
   }
 
 }

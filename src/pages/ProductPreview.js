@@ -67,7 +67,6 @@ const ProductPreview = () => {
   }
 
   const openChatModal = async () => {
-    console.log(product);
     // Ensure user cannot initiate a chat with their advert
     if (product === null || currentUser.id === product.sellerId) { return }
 
@@ -76,7 +75,6 @@ const ProductPreview = () => {
         user1: currentUser.id,
         user2: product?.sellerId
       });
-
 
       if (chat) {
         const second_participant_id = getSecondParticipantId(chat?.participants);
@@ -88,12 +86,11 @@ const ProductPreview = () => {
           payload: { chat, receiverId: second_participant_id }
         });
 
-        // const { data:secondUserData } = await UsersService.getUser(secondUserId);
-        // const { data: secondUserData } = await axios.get(`http://localhost:3000/api/user/${secondUserId}`);
-        // localStorage.setItem('secondUserData', JSON.stringify(secondUserData));
-        // localStorage.setItem('hideChatBox', JSON.stringify(false));
-        // dispatch({ type: HIDE_CHAT_BOX, payload: { value: false } });
-        // navigate('/chat');
+        const { data:secondUserData } = await ChatService.secondChatParticipant(second_participant_id);
+        localStorage.setItem('secondUserData', JSON.stringify(secondUserData));
+        localStorage.setItem('hideChatBox', JSON.stringify(false));
+        dispatch({ type: HIDE_CHAT_BOX, payload: { value: false } });
+        navigate('/chat');
       }
     } catch (error) {
       return error;

@@ -34,7 +34,7 @@ export default class UsersService {
   }
 
   static getUser = async (userId) => {
-    return await APICall(`api/user/${userId}`, 'GET');
+    return await APICall(`user/${userId}`, 'GET');
   }
 
   static getUserAds = async (userId) => {
