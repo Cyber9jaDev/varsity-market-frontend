@@ -58,7 +58,6 @@ const Chat = () => {
       setHasError(false);
       try {
         const { data } = await ChatService.getUserChats(currentUser.id);
-        console.log(data);
         setChats(data);
       }
       catch (error) {
@@ -100,7 +99,7 @@ const Chat = () => {
             </div>
 
             <div className={`chat-box-container ${windowWidth <= 768 && hideChatBox === false ? null : 'hide'}`}>
-              {/* {!isLoading && currentChat === null
+              {!isLoading && currentChat === null
                 ? <div className='null-chat'><h1>You have no active chat</h1></div>
                 : <ChatBox
                   // setHideChatBox={setHideChatBox} 
@@ -111,7 +110,7 @@ const Chat = () => {
                   currentUser={currentUser}
                   windowWidth={windowWidth}
                 />
-              } */}
+              }
             </div>
 
           </div>

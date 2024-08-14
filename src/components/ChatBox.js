@@ -28,7 +28,8 @@ const ChatBox = ({ currentUser, messageFromSocketServer, windowWidth, setMessage
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const { data } = await ChatService.getMessages(currentChat._id);
+        const { data } = await ChatService.getMessages(currentChat.id, currentUser.id, secondUserData.id);
+        console.log(data);
         setMessages(data);
       } catch (error) {
         console.log(error);
@@ -47,7 +48,6 @@ const ChatBox = ({ currentUser, messageFromSocketServer, windowWidth, setMessage
     const getUserData = async () => {
       try {
         const { data } = await UsersService.getUser(secondUserId);
-        console.log(data);
         localStorage.setItem('secondUserData', JSON.stringify(data));
         setSecondUserData(data);
         localStorage.setItem('hideChatBox', JSON.stringify(false));
@@ -103,9 +103,9 @@ const ChatBox = ({ currentUser, messageFromSocketServer, windowWidth, setMessage
           {
             messages.map((message) => {
               return (
-                <div ref={scrollToLastMessageRef} key={message._id} className={`message-wrapper ${message.senderId === currentUser.userId ? 'own' : 'second-user'}`}>
-                  <p className='text'>{message.message}</p>
-                  <p className='time text-end'>{moment(message.createdAt).fromNow()}</p>
+                <div ref={scrollToLastMessageRef} key={message.id} className={`message-wrapper ${message.senderId === currentUser.id ? 'own' : 'second-user'}`}>
+                  <p className='text'>{message.content}</p>
+                  <p className='time text-end'>{moment(message.sentAt).fromNow()}</p>
                 </div>
               );
             })

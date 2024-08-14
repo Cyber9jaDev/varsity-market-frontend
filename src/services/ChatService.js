@@ -5,8 +5,8 @@ export default class ChatService {
     return APICall(`/chat/${userId}`, 'GET');
   }
 
-  static getMessages = async (chatId) => {
-    return APICall(`/api/message/find/${chatId}`, 'GET');
+  static getMessages = async (chatId, user1, user2) => {
+    return APICall(`/chat/${chatId}/messages/${user1}/${user2}`, 'GET');
   }
 
   static sendMessage = async (body) => {
@@ -17,7 +17,7 @@ export default class ChatService {
     return APICall('/chat/initiate-chat', 'POST', body)
   }
 
-  static secondChatParticipant = async(secondParticipantId) => {
+  static secondChatParticipant = async (secondParticipantId) => {
     return APICall(`/auth/secondParticipantId/${secondParticipantId}`, "GET")
   }
 
