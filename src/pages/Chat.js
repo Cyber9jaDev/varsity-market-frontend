@@ -21,7 +21,6 @@ const Chat = () => {
   // const [ hideChatBox, setHideChatBox ] = useState(true);
   const socket = useRef();
 
-
   // handle window width on resize
   useEffect(() => {
     function handleWindowResize() { setWindowWidth(window.innerWidth) }
@@ -29,28 +28,28 @@ const Chat = () => {
     return () => { window.removeEventListener('resize', handleWindowResize) }
   }, []);
 
-  // useEffect(() => {
-  //   // socket.current = io();
-  //   socket.current = io('http://localhost:5050');
-  //   socket.current.emit('add-new-user', currentUser.userId);
-  //   socket.current.on('get-users', (users) => {
-  //     setOnlineUsers(users);
-  //   });
-  // }, [currentUser, messageToSocketServer, messageFromSocketServer]);
+  useEffect(() => {
+    socket.current = io();
+    // socket.current = io('http://localhost:5050');
+    socket.current.emit('add-new-user', currentUser.id);
+    socket.current.on('get-users', (users) => {
+      setOnlineUsers(users);
+    });
+  }, [currentUser, messageToSocketServer, messageFromSocketServer]);
 
   // Send Message to socket server
-  // useEffect(() => {
-  //   if (messageToSocketServer !== null) {
-  //     socket.current.emit('send-message', messageToSocketServer);
-  //   }
-  // }, [messageToSocketServer]);
+  useEffect(() => {
+    if (messageToSocketServer !== null) {
+      socket.current.emit('send-message', messageToSocketServer);
+    }
+  }, [messageToSocketServer]);
 
   // receive message from socket server
-  // useEffect(() => {
-  //   socket.current.on('receive-message', (data) => {
-  //     setMessageFromSocketServer(data);
-  //   })
-  // }, []);
+  useEffect(() => {
+    socket.current.on('receive-message', (data) => {
+      setMessageFromSocketServer(data);
+    })
+  }, []);
 
   useEffect(() => {
     const getUserChats = async () => {

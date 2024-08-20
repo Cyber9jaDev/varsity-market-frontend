@@ -19,17 +19,18 @@ const ChatBox = ({ currentUser, messageFromSocketServer, windowWidth, setMessage
     scrollToLastMessageRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   }, [messages]);
 
+
   useEffect(() => {
     if (messageFromSocketServer !== null) {
       setMessages(previousMessages => ([...previousMessages, messageFromSocketServer]));
     }
   }, [messageFromSocketServer]);
 
+  // Get user Messages
   useEffect(() => {
     const getMessages = async () => {
       try {
         const { data } = await ChatService.getMessages(currentChat.id, currentUser.id, secondUserData.id);
-        console.log(data);
         setMessages(data);
       } catch (error) {
         console.log(error);
@@ -62,15 +63,24 @@ const ChatBox = ({ currentUser, messageFromSocketServer, windowWidth, setMessage
     }
   }, [secondUserId, currentChat]);
 
+
+
   const handleSendMessage = async () => {
     if (messageText === '' || currentChat === null) return;
+
     // Fire Socket
-    const message = { senderId: currentUser.userId, message: messageText.trim(), chatId: currentChat._id }
+    const message = {
+      senderId: currentUser.id,
+      content: messageText.trim(),
+      chatId: currentChat.id
+    }
+
     try {
       const { data } = await ChatService.sendMessage(message);
       setMessages(previousMessages => ([...previousMessages, data]));
+
       // Send message to socket server
-      const receiverId = currentChat.users.find(id => id !== currentUser.userId);
+      const receiverId = currentChat.participants.find(participant => participant.participantId !== currentUser.id);
       setMessageToSocketServer({ ...message, receiverId });
       setMessageText('');
     } catch (error) {

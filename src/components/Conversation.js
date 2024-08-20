@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Avatar from '../assets/avatar.jpg';
-import UsersService from '../services/UsersService';
 import { SET_CURRENT_CHAT } from '../contexts/Actions';
 import { useAppContext } from '../contexts/AppContext';
 import ChatService from '../services/ChatService';
@@ -14,6 +13,14 @@ const Conversation = ({ chat, currentUser, onlineUsers }) => {
     const secondParticipant = participants.find(participant => participant.participantId !== currentUser.id);
     return secondParticipant.participantId;
   }
+
+  // const getSecondParticipantId = useCallback(
+  //   (participants) => {
+  //     const secondParticipant = participants.find(participant => participant.participantId !== currentUser.id);
+  //     return secondParticipant.participantId;
+  //   },
+  //   [currentUser]
+  // );
 
   useEffect(() => {
     const getUserData = async () => {
@@ -29,21 +36,25 @@ const Conversation = ({ chat, currentUser, onlineUsers }) => {
     if (chat !== null) {
       getUserData();
     }
-  }, []);
+  }, [chat, getSecondParticipantId]);
+  // }, []);
 
 
   useEffect(() => {
     const checkIfUserIsOnline = () => {
-      const foundUser = onlineUsers.find(user => user.userId === userData._id);
+      const foundUser = onlineUsers.find(user => user.id === userData.id);
       if (foundUser) { setUserIsOnline(true) }
     }
 
-    if (userData !== null) { checkIfUserIsOnline() }
+    if (userData !== null) {
+      checkIfUserIsOnline()
+    }
 
   }, [userData, onlineUsers]);
 
 
   const handleCurrentChat = () => {
+    console.log(chat);
     if (chat !== null) {
       if (currentChat !== null) {
         if (chat.id === currentChat.id) return   // Ensure users cannot send messages to themselves
@@ -58,7 +69,6 @@ const Conversation = ({ chat, currentUser, onlineUsers }) => {
       });
     }
   }
-
 
   return (
     <div onClick={handleCurrentChat} key={chat.id} className='chat-block my-2'>

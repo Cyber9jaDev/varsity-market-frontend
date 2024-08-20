@@ -5,18 +5,20 @@ export default class UsersService {
   //   return await APICall('/auth/registration-key', 'POST', payload)
   // }
 
+    static baseUrl = "http://localhost:3001"
+
   static Register = async (payload) => {
     const userType = payload?.userType;
     delete payload.userType;
-    return await APICall(`/auth/signup/${userType}`, 'POST', payload);
+    return await APICall(`${this.baseUrl}/auth/signup/${userType}`, 'POST', payload);
   }
 
   static Login = async (payload) => {
-    return await APICall('/auth/signin', 'POST', payload);
+    // return await APICall(`${this.baseUrl}/auth/signin`, 'POST', payload);
+    return await APICall(`http://localhost:3001/auth/signin`, 'POST', payload);
   }
 
   static PostAd = async ({ category, description, price, condition, name, location, images }) => {
-    console.log(images);
     let formData = new FormData();
     formData.append('category', category);
     formData.append('description', description);
@@ -29,27 +31,27 @@ export default class UsersService {
       formData.append('productImages', images[i]);
     }
 
-    return await APICall('/product', 'POST', formData);
+    return await APICall(`${this.baseUrl}/product`, 'POST', formData);
     
   }
 
   static getUser = async (userId) => {
-    return await APICall(`user/${userId}`, 'GET');
+    return await APICall(`${this.baseUrl}user/${userId}`, 'GET');
   }
 
   static getUserAds = async (userId) => {
-    return await APICall(`api/user-ads/id/${userId}`, 'GET');
+    return await APICall(`${this.baseUrl}api/user-ads/id/${userId}`, 'GET');
   }
 
   static deleteAd = async (productId) => {
-    return await APICall(`api/user-ads/id/${productId}`, 'DELETE')
+    return await APICall(`${this.baseUrl}api/user-ads/id/${productId}`, 'DELETE')
   }
 
   static uploadProfilePicture = async (userId, payload) => {
-    return await APICall(`api/upload-profile-picture/${userId}`, 'PATCH', payload);
+    return await APICall(`${this.baseUrl}api/upload-profile-picture/${userId}`, 'PATCH', payload);
   }
 
   static updateUserProfile = async (payload) => {
-    return await APICall('api/update-user-info', 'PATCH', payload);
+    return await APICall(`${this.baseUrl}api/update-user-info`, 'PATCH', payload);
   }
 }
