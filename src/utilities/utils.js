@@ -71,11 +71,11 @@ export const findSchool = (value, values) => {
 }
 
 export const findSchoolByCode = (value) => {
-  const school = schools.find((school) => school.value === value);
-  if (school) {
-    return school.label
+  const isValidLocation = schools.find((school) => school.value === value);
+  if (isValidLocation) {
+    return isValidLocation.label
   }
-  return { label: "", value: "" }
+  return "All Universities"
 }
 
 export const findCategoryLabel = (category) => {

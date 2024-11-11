@@ -62,7 +62,9 @@ const Product = () => {
         dispatch({ type: OPEN_FILTER_MODAL, payload: { value: false } });
       }
 
-      const { data } = await ProductService.GetProducts(category, location, values)
+      const { data } = await ProductService.GetProducts(category, location, values);
+
+      console.log(data);
 
       if (data) {
         setProducts([...data?.products]);
@@ -112,9 +114,6 @@ const Product = () => {
     }
   }
 
-
-  // console.log(values.dateFrom);
-  // console.log(values.dateTo);
 
   return (
     <section className="container-fluid" id="products">

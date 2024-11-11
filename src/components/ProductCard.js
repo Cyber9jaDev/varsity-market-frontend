@@ -31,7 +31,12 @@ const ProductCard = ({
         <div className={`${view === 'list' ? 'list-view-product-details-wrapper' : 'grid-view-product-details-wrapper'}`}>
           <h2 className={`${view === 'list' ? 'list-view-product-name' : 'grid-view-product-name'}`}>{name}</h2>
           <span className={`${view === 'list' ? 'list-view-product-price' : 'grid-view-product-price'}`}>{formatNaira(price)}</span>
-          <span className={`${view === 'list' ? 'list-view-product-school' : 'grid-view-product-school'}`}><i className="fa-solid fa-location-dot location-icon pe-1"></i> {location === 'all' ? 'All Schools' : findSchoolByCode(location)}</span>
+          {
+            <span className={`${view === 'list' ? 'list-view-product-school' : 'grid-view-product-school'}`}>
+              <i className="fa-solid fa-location-dot location-icon pe-1"></i> 
+              { location === 'ALL' ? 'All Schools' : findSchoolByCode(location)}
+            </span>
+          }
         </div>
         <div className={`${view === 'list' ? 'list-view-product-date-wrapper' : 'grid-view-product-date-wrapper'}`}>
           <p className={`${view === 'list' ? 'list-view-product-date' : 'grid-view-product-date'}`}>{convertDate(createdAt).date}</p>

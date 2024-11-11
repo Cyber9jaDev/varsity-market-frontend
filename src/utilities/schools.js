@@ -44,6 +44,10 @@ const locations = [
         label: "University of Ibadan",
         value: "UI",
     },
+    {
+        label: "University of Lagos",
+        value: "UNILAG",
+    },
 ]
 
 
