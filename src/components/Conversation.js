@@ -53,6 +53,7 @@ const Conversation = ({ chat, currentUser, onlineUsers }) => {
   }, [userData, onlineUsers]);
 
 
+  // Set the active chat when clicked on a conversation block
   const handleCurrentChat = () => {
     console.log(chat);
     if (chat !== null) {
@@ -60,13 +61,14 @@ const Conversation = ({ chat, currentUser, onlineUsers }) => {
         if (chat.id === currentChat.id) return   // Ensure users cannot send messages to themselves
       }
 
-      localStorage.setItem('currentChat', JSON.stringify(chat));
+      // localStorage.setItem('currentChat', JSON.stringify(chat));
 
       const secondUserId = getSecondParticipantId(chat?.participants);
-      dispatch({
-        type: SET_CURRENT_CHAT,
-        payload: { chat, receiverId: secondUserId }
-      });
+      console.log(secondUserId);
+      // dispatch({
+      //   type: SET_CURRENT_CHAT,
+      //   payload: { chat, receiverId: secondUserId }
+      // });
     }
   }
 

@@ -82,6 +82,8 @@ const Chat = () => {
                 <i className="fa-solid fa-magnifying-glass ps-2"></i>
                 <input placeholder='Search messages or users' className='search w-100 px-3 py-2' type="search" name="search-chat" id="search-chat" />
               </div>
+
+              {/* Conversation List */}
               {
                 <div className="conversation-wrapper mt-4">
                   {!isLoading && hasError === false && chats.map((chat) =>

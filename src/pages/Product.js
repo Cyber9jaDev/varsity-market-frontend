@@ -36,7 +36,7 @@ const Product = () => {
     price: (price !== null && price !== 'undefined') ? { min: price.split(',')[0], max: price.split(',')[1] } : { min: 10, max: 9000000 },
     orderBy: localStorage.getItem("orderBy") || 'asc',
     page: 1,
-    limit: 8,
+    limit: 10,
     totalPages: null,
     dateFrom: localStorage.getItem('dateFrom') || '2020-03-01',
     dateTo: localStorage.getItem('dateTo') || tomorrow,
@@ -111,6 +111,10 @@ const Product = () => {
       localStorage.setItem('searchText', value)
     }
   }
+
+
+  // console.log(values.dateFrom);
+  // console.log(values.dateTo);
 
   return (
     <section className="container-fluid" id="products">
