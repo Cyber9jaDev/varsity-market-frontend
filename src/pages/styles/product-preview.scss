@@ -43,24 +43,21 @@
   .address-container{
     display: flex;
     align-items: center;
+    // background-color: red
   }
 
   .location-icon{
     color: #f3c500;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 
   .city, .date{
     font-size: 1.2em;
-    font-weight: 600;
-    margin: auto 0;
-    color: rgb(101, 90, 90);
+    color: rgb(0, 0, 0);
+    font-weight: 900;
   }
 
-  .city, .state{
-    margin-left: 7px;
-  }
 
   .date{
     margin-left: auto;

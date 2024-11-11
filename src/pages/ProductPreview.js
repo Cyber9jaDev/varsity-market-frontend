@@ -10,7 +10,6 @@ import schools from '../utilities/schools';
 import ChatService from '../services/ChatService';
 import { useAppContext } from '../contexts/AppContext';
 import { HIDE_CHAT_BOX, SET_CURRENT_CHAT } from '../contexts/Actions';
-import axios from 'axios';
 
 
 const ProductPreview = () => {
@@ -105,8 +104,10 @@ const ProductPreview = () => {
             <div className="container product-wrapper">
 
               <div className="address-container">
-                <i className="fa-solid fa-location-dot location-icon"></i>
-                {product.location && <p className="city">{product.location}</p>}
+                <div>
+                  <i className="fa-solid fa-location-dot location-icon"></i>
+                </div>
+                {product.location && <p className="city">{findSchool(product.location)}</p>}
                 <div className="v-bar"></div>
                 {product.createdAt && <p className="date">{moment(product.createdAt).format('dddd, Do MMM YYYY')}</p>}
               </div>
