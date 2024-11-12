@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import formatNaira from "format-to-naira";
 import './styles/product-preview.scss';
 import moment from 'moment';
 import ProductService from '../services/ProductService';
@@ -12,6 +11,7 @@ import { useAppContext } from '../contexts/AppContext';
 import { HIDE_CHAT_BOX, SET_CURRENT_CHAT } from '../contexts/Actions';
 import ProductDetails from '../components/ProductDetails';
 import ContactSeller from '../components/ContactSeller';
+import PriceBox from '../components/PriceBox';
 
 
 const ProductPreview = () => {
@@ -139,38 +139,13 @@ const ProductPreview = () => {
                   )
                 })}
               </div>
-
               <ProductDetails product={product} />
-
             </div>
           </div>
 
           <div className="right">
-
-            <div className="price-box-container">
-              <div className="clip"> </div>
-              <div className="price-box">
-
-                {product.price && <div className='box-row'>
-                  <p className="price-text">Price</p>
-                  <p className="price">{formatNaira(product.price)}</p>
-                </div>
-                }
-                {product.condition && <div className='box-row'>
-                  <p className="condition-text">Condition</p>
-                  <p className="condition">{product.condition}</p>
-                </div>
-                }
-              </div>
-            </div>
-
+            <PriceBox product={product} />
             <ContactSeller openChatModal={openChatModal} />
-
-
-            <div className="payment-details">
-              <h3>Total:</h3>
-              <h1>$19800 * </h1>
-            </div>
           </div>
         </div>
       }
