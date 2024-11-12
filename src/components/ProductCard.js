@@ -37,6 +37,7 @@ const ProductCard = ({
               { location === 'ALL' ? 'All Schools' : findSchoolByCode(location)}
             </span>
           }
+          <span className={`${view === 'list' ? 'list-view-product-price' : 'grid-view-product-price'}`}>Available in stock: {19}</span>
         </div>
         <div className={`${view === 'list' ? 'list-view-product-date-wrapper' : 'grid-view-product-date-wrapper'}`}>
           <p className={`${view === 'list' ? 'list-view-product-date' : 'grid-view-product-date'}`}>{convertDate(createdAt).date}</p>

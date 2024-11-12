@@ -10,6 +10,8 @@ import schools from '../utilities/schools';
 import ChatService from '../services/ChatService';
 import { useAppContext } from '../contexts/AppContext';
 import { HIDE_CHAT_BOX, SET_CURRENT_CHAT } from '../contexts/Actions';
+import ProductDetails from '../components/ProductDetails';
+import ContactSeller from '../components/ContactSeller';
 
 
 const ProductPreview = () => {
@@ -85,7 +87,7 @@ const ProductPreview = () => {
           payload: { chat, receiverId: second_participant_id }
         });
 
-        const { data:secondUserData } = await ChatService.secondChatParticipant(second_participant_id);
+        const { data: secondUserData } = await ChatService.secondChatParticipant(second_participant_id);
         localStorage.setItem('secondUserData', JSON.stringify(secondUserData));
         localStorage.setItem('hideChatBox', JSON.stringify(false));
         dispatch({ type: HIDE_CHAT_BOX, payload: { value: false } });
@@ -138,37 +140,13 @@ const ProductPreview = () => {
                 })}
               </div>
 
-              {product.name &&
-                <details open={true} className="name-container">
-                  <summary className='name-text fs-5'>Product</summary>
-                  <p className="name">{product.name}</p>
-                </details>
-              }
-
-              {product.description &&
-                <details open={true} className="description-container">
-                  <summary className='email-text fs-5'>Seller Email</summary>
-                  <p className="email">{product?.seller?.email}</p>
-                </details>
-              }
-              {product.description &&
-                <details open={true} className="description-container">
-                  <summary className='description-text fs-5'>Description</summary>
-                  <p className="description">{product.description}</p>
-                </details>
-              }
-
-              {product.school &&
-                <details open={true} className="school-container">
-                  <summary className='school-text  fs-5'>School</summary>
-                  <p className="school">{findSchool(product.school)}</p>
-                </details>
-              }
+              <ProductDetails product={product} />
 
             </div>
           </div>
 
           <div className="right">
+
             <div className="price-box-container">
               <div className="clip"> </div>
               <div className="price-box">
@@ -185,23 +163,13 @@ const ProductPreview = () => {
                 }
               </div>
             </div>
-            <div className="ad-block">
-              <h5>Interested in this ad?</h5>
-              <p className='contact-text'>Contact the seller!</p>
-              <div className="contact-details-container">
-                <a href='tel:08062128170' className="contact-details">
-                  <div className="phone-icon-container">
-                    <i className="fa-solid fa-phone-flip phone-icon"></i>
-                  </div>
-                  <span className='call-text'>Call</span>
-                </a>
-                <span onClick={openChatModal} className="contact-details">
-                  <div className="message-icon-container">
-                    <i className="fa-solid fa-message message-icon"></i>
-                  </div>
-                  <span className='chat-text'>Chat</span>
-                </span>
-              </div>
+
+            <ContactSeller openChatModal={openChatModal} />
+
+
+            <div className="payment-details">
+              <h3>Total:</h3>
+              <h1>$19800 * </h1>
             </div>
           </div>
         </div>
