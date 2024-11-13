@@ -11,6 +11,7 @@ import PrivateRoute from './pages/PrivateRoute';
 import Product from './pages/Product';
 import Chat from './pages/Chat';
 import About from './pages/About';
+import Checkout from './pages/Checkout';
 
 const RouterLinks = () => {
   return (
@@ -28,6 +29,8 @@ const RouterLinks = () => {
         <Route path='/login' exact element={ <Login/> }/>
         <Route path='/post-ad' exact element={ <PrivateRoute> <PostAd/> </PrivateRoute> } />
         <Route path='/chat' exact element={<PrivateRoute> <Chat/></PrivateRoute> }/>
+        <Route path='/checkout/payment' exact element={<PrivateRoute> <Checkout/></PrivateRoute> }/>
+
       </Routes>
       </BrowserRouter>
     </>
