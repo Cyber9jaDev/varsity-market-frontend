@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const Checkout = () => {
   return (
-    <div>Checkout Page</div>
+    <section>
+      
+    </section>
   )
 }
 
