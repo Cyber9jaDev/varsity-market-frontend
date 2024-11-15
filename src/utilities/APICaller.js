@@ -80,5 +80,5 @@ export default async function APICall(Url, Method, Data = null, timeoutOverride,
       );
     }
   }
-  return !response ? null : response.data ? response.data : { status: "success" };
+  return !response ? null : response.data ? response.data : { status: "succes" };
 }
