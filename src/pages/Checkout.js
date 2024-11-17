@@ -1,26 +1,30 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import './styles/checkout.scss';
+import formatNaira from 'format-to-naira';
 
 const Checkout = () => {
-  const location = useLocation();
+  const { state } = useLocation();
 
-  // The checkout should be at the center of the screen
+// Protect the page by checking if the state exists
+  if(!state || !state.product || !state.totalAmount){
+    return <Navigate to='/' replace/>
+  }
+
   return (
     <section id='checkout'>
       <div className="checkout-container">
         <h3>Checkout</h3>
-        <h6>Payment Method</h6>
-        <span>Selecting any of the payment method will redirect you to their payment platform.</span>
+        <h5>Selecting any of the payment method will redirect you to their payment platform.</h5>
 
         <div className="summary">
           <p className="content">
             <span className="left">Original Price</span>
-            <span className="right">#120000</span>
+            <span className="right">{formatNaira(state?.product?.price)}</span>
           </p>
           <p className="content">
-            <span className="left">Total (2)</span>
-            <span className="right">129000</span>
+            <span className="left">Total ({state?.quantity})</span>
+            <span className="right">{formatNaira(state?.totalAmount)}</span>
           </p>
         </div>
 
