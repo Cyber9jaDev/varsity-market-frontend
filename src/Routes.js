@@ -29,7 +29,7 @@ const RouterLinks = () => {
         <Route path='/login' exact element={ <Login/> }/>
         <Route path='/post-ad' exact element={ <PrivateRoute> <PostAd/> </PrivateRoute> } />
         <Route path='/chat' exact element={<PrivateRoute> <Chat/></PrivateRoute> }/>
-        <Route path='/checkout/payment' exact element={<PrivateRoute> <Checkout/></PrivateRoute> }/>
+        <Route path='/checkout' exact element={<PrivateRoute> <Checkout/></PrivateRoute> }/>
 
       </Routes>
       </BrowserRouter>

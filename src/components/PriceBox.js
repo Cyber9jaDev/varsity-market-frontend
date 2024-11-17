@@ -1,16 +1,27 @@
 import formatNaira from "format-to-naira";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PriceBox = ({ product }) => {
-  const [quantity, setQuantity] = useState(2);
+  const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
 
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    navigate(`/checkout`, {
+      state: {
+        product: product,
+        quantity,
+        totalAmount: product.price * quantity
+      }
+    });
+  }
 
   return (
     <div className="price-box-container">
       <div className="clip"> </div>
       <div className="price-box">
-        <form action="">
-
+        <form onSubmit={handleCheckout}>
           <div className="fee-wrapper">
             <div className="subtotal">
               <span>{formatNaira(product.price)} x </span> (Quantity)
@@ -21,10 +32,7 @@ const PriceBox = ({ product }) => {
               <button type="submit"> Checkout </button>
             </div>
           </div>
-
-
         </form>
-
       </div>
     </div>
   )
