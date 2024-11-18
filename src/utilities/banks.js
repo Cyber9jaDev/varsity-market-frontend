@@ -1,4 +1,4 @@
-const BankList = [
+export const BankList = [
   {
     "name": "Access Bank",
     "slug": "access-bank",

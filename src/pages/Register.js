@@ -3,6 +3,7 @@ import './styles/register.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../contexts/AppContext';
 import { refresh } from '../utilities/utils';
+import { BankList } from '../utilities/banks';
 
 const Register = () => {
   const { register, currentUser } = useAppContext();
@@ -16,7 +17,10 @@ const Register = () => {
     password: '',
     confirmPassword: '',
     phone: '',
-    userType: "BUYER"
+    userType: "BUYER",
+    accountNumber: "",
+    bankName: "",
+    businessName: "",
   });
 
   const handleSubmit = async (e) => {
@@ -60,12 +64,23 @@ const Register = () => {
                 <select onChange={handleChange} defaultValue="BUYER" name="userType" id="userType">
                   <option value="BUYER">Buyer</option>
                   <option value="SELLER">Seller</option>
-                  <option value="ADMIN">Admin</option>
+                  {/* <option value="ADMIN">Admin</option> */}
                 </select>
               </div>
               <div className="col-lg-6 col-sm-12 my-3">
                 <input placeholder='Phone number' onChange={handleChange} type="tel" name="phone" id="phone" required />
               </div>
+              {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
+                <input placeholder='Account number' onChange={handleChange} type="text" name="accountNumber" id="accountNumber" required />
+              </div>}
+              {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
+                <select onChange={handleChange} defaultValue="044" name="bankName" id="bankName">
+                  {BankList.map(bank => <option value={bank.code} key={bank.slug}>{bank.name}</option>)}
+                </select>
+              </div>}
+              {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
+                <input placeholder='Business name e.g Arike pre-order' onChange={handleChange} type="text" name="businessName" id="businessName" required />
+              </div>}
               <div className="col-lg-6 col-sm-12 my-3">
                 <input placeholder='Password' onChange={handleChange} type="password" name="password" id="password" required />
               </div>
