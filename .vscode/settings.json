@@ -4,8 +4,10 @@
     "POSTAD",
     "chatbox",
     "cloudinary",
+    "flutterwave",
     "fontawesome",
     "fortawesome",
+    "paystack",
     "socketid",
     "timeago",
     "toastify"
