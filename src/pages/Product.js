@@ -63,14 +63,9 @@ const Product = () => {
       }
 
       const { data } = await ProductService.GetProducts(category, location, values);
-
-      console.log(data);
-
-      if (data) {
-        setProducts([...data?.products]);
-        setValues(prev => ({ ...prev, totalPages: data?.totalPages }))
-        dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
-      }
+      setProducts([...data?.products]);
+      setValues(prev => ({ ...prev, totalPages: data?.totalPages }))
+      dispatch({ type: FIND_BY_CATEGORY_SUCCESS });
       setHasError(false);
     }
     catch (error) {
@@ -113,7 +108,6 @@ const Product = () => {
       localStorage.setItem('searchText', value)
     }
   }
-
 
   return (
     <section className="container-fluid" id="products">
@@ -238,7 +232,7 @@ const Product = () => {
               {isLoading === true ? <Loading /> : isLoading === false && hasError === true ? <Error /> :
                 isLoading === false && hasError === false && values.products?.length === 0 ? <Empty /> : <div className="container mt-3">
                   <div className="row products-container">
-                    {products?.map(product => <ProductCard view={view} category={category} key={product.id} {...product} />)}
+                    {products?.map(product => <ProductCard view={view} category={product.category} key={product.id} {...product} />)}
                   </div>
                 </div>
               }

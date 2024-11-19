@@ -2,11 +2,11 @@ import toast from 'react-hot-toast';
 import schools from './schools';
 
 export const categories = [
-  {
-    value: 'ALL',
-    icon: 'fa-solid fa-cart-shopping',
-    label: 'All Categories',
-  },  
+  // {
+  //   value: 'ALL',
+  //   icon: 'fa-solid fa-cart-shopping',
+  //   label: 'All Categories',
+  // },  
   {
     value: 'PHONE',
     icon: 'fa-solid fa-mobile-screen-button',
@@ -62,6 +62,7 @@ export const findCategory = (value, values) => {
   return values.defaultCategory;
 };
 
+
 export const findSchool = (value, values) => {
   const school = schools.find((school) => school.value === value);
   if (school) {
@@ -80,16 +81,15 @@ export const findSchoolByCode = (value) => {
 
 export const findCategoryLabel = (category) => {
   if (category === 'all') return 'All Categories'
-  else if (category === 'mobile') return 'Mobile Phones'
-  else if (category === 'mobile') return 'Mobile Phones'
-  else if (category === 'computer') return 'Laptop and Accessories'
-  else if (category === 'car') return 'Cars'
-  else if (category === 'bike') return 'Bikes'
-  else if (category === 'furniture') return 'Furnitures'
-  else if (category === 'pet') return 'Pets'
-  else if (category === 'book') return 'Book'
-  else if (category === 'fashion') return 'Fashion'
-  else if (category === 'accommodation') return 'Accommodation'
+  else if (category === 'phone'.toUpperCase()) return 'Mobile Phones'
+  else if (category === 'computer'.toUpperCase()) return 'Laptop and Accessories'
+  else if (category === 'car'.toUpperCase()) return 'Cars'
+  else if (category === 'bike'.toUpperCase()) return 'Bikes'
+  else if (category === 'furniture'.toUpperCase()) return 'Furnitures'
+  else if (category === 'pet'.toUpperCase()) return 'Pets'
+  else if (category === 'book'.toUpperCase()) return 'Book'
+  else if (category === 'fashion'.toUpperCase()) return 'Fashion'
+  else if (category === 'accommodation'.toUpperCase()) return 'Accommodation'
 };
 
 export const convertDate = (date) => {

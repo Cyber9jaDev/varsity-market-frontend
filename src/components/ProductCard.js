@@ -2,7 +2,7 @@ import React from "react";
 import formatNaira from "format-to-naira";
 import { Link } from "react-router-dom";
 import image from "../assets/d7.jpg";
-import { categories, convertDate, findSchoolByCode } from "../utilities/utils";
+import { categories, convertDate, findCategoryLabel, findSchoolByCode } from "../utilities/utils";
 
 const ProductCard = ({
   location,
@@ -16,10 +16,7 @@ const ProductCard = ({
   quantity
 }) => {
 
-  const findLabel = (category) => {
-    const item = categories.find((c) => c.value === category);
-    return item.label;
-  };
+
 
   return (
     <Link to={`/${category}/${id}`} className={`${view === 'list' ? 'list-view-container' : 'grid-view-container'} text-decoration-none`}>
@@ -34,15 +31,16 @@ const ProductCard = ({
           <span className={`${view === 'list' ? 'list-view-product-price' : 'grid-view-product-price'}`}>{formatNaira(price)}</span>
           {
             <span className={`${view === 'list' ? 'list-view-product-school' : 'grid-view-product-school'}`}>
-              <i className="fa-solid fa-location-dot location-icon pe-1"></i> 
-              { location === 'ALL' ? 'All Schools' : findSchoolByCode(location)}
+              <i className="fa-solid fa-location-dot location-icon pe-1"></i>
+              {location === 'ALL' ? 'All Schools' : findSchoolByCode(location)}
             </span>
           }
           <span className={`${view === 'list' ? 'list-view-product-quantity' : 'grid-view-product-quantity'}`}>Available in stock: {quantity}</span>
         </div>
         <div className={`${view === 'list' ? 'list-view-product-date-wrapper' : 'grid-view-product-date-wrapper'}`}>
           <p className={`${view === 'list' ? 'list-view-product-date' : 'grid-view-product-date'}`}>{convertDate(createdAt).date}</p>
-          <p className={`${view === 'list' ? 'list-view-product-category' : 'grid-view-product-category'}`}>{findLabel(category)}</p>
+          {/* <p className={`${view === 'list' ? 'list-view-product-category' : 'grid-view-product-category'}`}>{category}</p> */}
+          <p className={`${view === 'list' ? 'list-view-product-category' : 'grid-view-product-category'}`}>{findCategoryLabel(category)}</p>
         </div>
       </div>
     </Link>
