@@ -1,69 +1,78 @@
-#post-ad{
+#post-ad {
   width: 100%;
   margin: auto;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  background-image: url('../../assets/login.jpg');
-  background-position:center;
-  background-repeat:no-repeat;
-  background-size:cover;
+  background-image: url("../../assets/login.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
-  .post-ad-wrapper{
-    display:flex;
+  .post-ad-wrapper {
+    display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     flex-direction: column;
     width: 900px;
   }
 
-
-
-  form{ 
+  form {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 10px 20px;
     padding: 30px;
-    box-shadow: 1px 1px 9px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 1px 1px 9px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00000030;
   }
 
-  form > .submit-btn-wrapper, form > .textarea-wrapper, form > .header-text-wrapper{
+  form > .submit-btn-wrapper,
+  form > .textarea-wrapper,
+  form > .header-text-wrapper {
     grid-column: span 12;
   }
 
-  .header-text{
+  .header-text {
     width: 100%;
     font-weight: 600;
-    font-size: 1.8em;
+    font-size: 1.5em;
     line-height: 29px;
-    color: #071E2B;
+    color: #071e2b;
     letter-spacing: 0.05em;
   }
 
-  .asterisk{
+  .asterisk {
     color: red;
   }
 
-  .form-group{
+  .form-group {
     grid-column: span 6;
   }
 
-  .input, label, select, textarea{
+  .form-group.photos {
+    grid-column: span 12;
+  }
+
+  .input,
+  label,
+  select,
+  textarea {
     display: block;
     width: 100%;
     margin: 5px 0;
   }
 
-  label{
-    font-size: 1.2em;
-    font-family: 'Source Sans Pro', sans-serif;
+  label {
+    font-size: 14px;
+    font-family: "Source Sans Pro", sans-serif;
     color: #393434;
     letter-spacing: 0.25px;
     font-weight: 500;
   }
 
-  .input, select, textarea{ 
+  .input,
+  select,
+  textarea {
     height: 45px;
     outline: none;
     border: 0.001px solid lightblue;
@@ -73,54 +82,53 @@
     padding: 0 5px;
   }
 
-  textarea{
-    height: 100px !important;
+  textarea {
+    height: 95px !important;
     resize: none;
   }
 
-  .photos-container{
+  .photos-container {
     display: flex !important;
-    height: 45px;
+    height: 40px;
     align-items: center !important;
     outline: none;
     border: 0.001px solid lightblue;
   }
 
-  .photos-input{
+  .photos-input {
     margin: auto 0 auto 10px !important;
   }
 
-  .button{
-    margin: 40px 0 20px 0;
+  .button {
+    margin: 10px 0 20px 0;
     width: 100%;
     outline: none;
     border: 0.001px solid lightblue;
     border-radius: 5px;
-    height: 50px;
-    background:#01A185;
+    height: 40px;
+    background: #01a185;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1em;
     letter-spacing: 0.005em;
     color: #fff;
     text-transform: uppercase;
 
-    &:hover{
-      background:#01A185;
+    &:hover {
+      background: #01a185;
       color: #fff;
     }
   }
 
-  ::placeholder{
+  ::placeholder {
     color: rgb(187, 187, 187);
   }
 
-
-  @media screen and (max-width: 768px){
-    .post-ad-wrapper{
-      width:100%;
+  @media screen and (max-width: 768px) {
+    .post-ad-wrapper {
+      width: 100%;
     }
 
-    .form-group{
+    .form-group {
       grid-column: span 12;
     }
   }

@@ -8,6 +8,7 @@ export default class UsersService {
     static baseUrl = "http://localhost:3001"
 
   static Register = async (payload) => {
+    console.log(payload);
     const userType = payload?.userType;
     delete payload.userType;
     return await APICall(`${this.baseUrl}/auth/signup/${userType}`, 'POST', payload);

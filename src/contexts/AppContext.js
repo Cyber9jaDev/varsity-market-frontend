@@ -45,7 +45,7 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem("currentUser");
   };
 
-  const register = async ({ name, email, password, confirmPassword, phone, userType }) => {
+  const register = async ({ name, email, password, confirmPassword, phone, userType, businessName, accountNumber, bankName }) => {
     dispatch({ type: REGISTRATION_BEGINS });
 
     if (!name || !email || !password || !confirmPassword || !phone || !userType) {
@@ -59,7 +59,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await UsersService.Register({ email, password, name, phone, userType });
+      const { data } = await UsersService.Register({ email, password, name, phone, userType, businessName, accountNumber, bankName });
       saveUserToLocalStorage(data);
       dispatch({ type: REGISTRATION_SUCCESS });
       dispatch({ type: SET_CURRENT_USER, payload: { ...data } });
@@ -90,7 +90,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const postAd = async ({ category, description, price, condition, name, location, images }) => {
+  const postAd = async ({ category, description, price, condition, name, location, images, quantity }) => {
     dispatch({ type: POSTAD_BEGINS });
     if (!category || !description || !price || !condition || !name || !location || images.length < 1) {
       displayAlert("error", "Please fill all required fields");
@@ -99,7 +99,7 @@ export const AppProvider = ({ children }) => {
 
     try {
       await UsersService.PostAd({
-        category, description, price, condition, name, location, images,
+        category, description, price, condition, name, location, images, quantity
       });
       dispatch({ type: POSTAD_SUCCESS, payload: { status: true } });
       displayAlert("success", "Ads Posted Successfully");

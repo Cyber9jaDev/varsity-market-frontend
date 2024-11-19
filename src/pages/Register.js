@@ -18,9 +18,9 @@ const Register = () => {
     confirmPassword: '',
     phone: '',
     userType: "BUYER",
-    accountNumber: "",
-    bankName: "",
-    businessName: "",
+    accountNumber: null,
+    bankName: null,
+    businessName: null,
   });
 
   const handleSubmit = async (e) => {
@@ -64,18 +64,17 @@ const Register = () => {
                 <select onChange={handleChange} defaultValue="BUYER" name="userType" id="userType">
                   <option value="BUYER">Buyer</option>
                   <option value="SELLER">Seller</option>
-                  {/* <option value="ADMIN">Admin</option> */}
                 </select>
               </div>
               <div className="col-lg-6 col-sm-12 my-3">
-                <input placeholder='Phone number' onChange={handleChange} type="tel" name="phone" id="phone" required />
+                <input placeholder='Phone number (8062128170)' onChange={handleChange} type="tel" name="phone" id="phone" required />
               </div>
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
                 <input placeholder='Account number' onChange={handleChange} type="text" name="accountNumber" id="accountNumber" required />
               </div>}
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
                 <select onChange={handleChange} defaultValue="044" name="bankName" id="bankName">
-                  {BankList.map(bank => <option value={bank.code} key={bank.slug}>{bank.name}</option>)}
+                  {BankList.map(bank => <option value={bank.name} key={bank.slug}>{bank.name}</option>)}
                 </select>
               </div>}
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">

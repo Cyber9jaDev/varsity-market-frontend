@@ -17,6 +17,7 @@ const PostAd = () => {
     location: "UI",
     condition: "NEW",
     category: "CAR",
+    quantity: 1
     // defaultCategory: { value: 'PHONE', label: 'Mobile Phones' },
     // defaultSchool: { value: "UI", label: "University of Ibadan" }
   });
@@ -70,6 +71,7 @@ const PostAd = () => {
             </select>
           </div>
           <FormRow field="input" handleChange={handleChange} name="price" type="number" label="Price(N)" price={values.price} />
+          <FormRow field="input" handleChange={handleChange} name="quantity" type="number" label="Quantity" quantity={values.quantity} />
           <div className="form-group">
             <label htmlFor="condition">Condition</label>
             <select defaultValue={"NEW"} onChange={handleChange} name="condition" id="condition">
