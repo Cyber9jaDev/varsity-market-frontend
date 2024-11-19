@@ -96,7 +96,7 @@
 
   .list-view-product-price{
     color: #01a185;
-    font-size: 1rem;
+    font-size: 14px;
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.03em;
     font-weight: 600;
@@ -104,8 +104,8 @@
 
   .list-view-product-school{
     color: #03100e;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 500;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -180,7 +180,7 @@
   }
   .grid-view-product-price{
     color: #078772;
-    font-size: 0.9rem;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
     letter-spacing: 0.03em;
     font-weight: bold;
@@ -188,10 +188,9 @@
   }
   .grid-view-product-school{
     margin: 0;
-    font-size: 1rem;
+    font-size: 14px;
     letter-spacing: 0.03em;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     color: #000;
     display: block;
     white-space: nowrap;

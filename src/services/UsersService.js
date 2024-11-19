@@ -5,7 +5,7 @@ export default class UsersService {
   //   return await APICall('/auth/registration-key', 'POST', payload)
   // }
 
-    static baseUrl = "http://localhost:3001"
+  static baseUrl = "http://localhost:3001"
 
   static Register = async (payload) => {
     console.log(payload);
@@ -19,7 +19,7 @@ export default class UsersService {
     return await APICall(`http://localhost:3001/auth/signin`, 'POST', payload);
   }
 
-  static PostAd = async ({ category, description, price, condition, name, location, images }) => {
+  static PostAd = async ({ category, description, price, condition, name, location, quantity, images }) => {
     let formData = new FormData();
     formData.append('category', category);
     formData.append('description', description);
@@ -27,13 +27,16 @@ export default class UsersService {
     formData.append('condition', condition);
     formData.append('name', name);
     formData.append('location', location);
+    formData.append('quantity', quantity);
 
     for (let i = 0; i < images.length; i++) {
       formData.append('productImages', images[i]);
     }
 
-    return await APICall(`${this.baseUrl}/product`, 'POST', formData);
-    
+    console.log(quantity);
+
+    return await APICall(`${this.baseUrl}/products/add-product`, 'POST', formData);
+
   }
 
   static getUser = async (userId) => {

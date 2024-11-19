@@ -57,12 +57,10 @@ const PostAd = () => {
   return (
     <section id="post-ad">
       <div className="post-ad-wrapper">
-
         <form className="form-control" onSubmit={handleSubmit}>
           <div className="header-text-wrapper">
             <h3 className="header-text">Post an ad</h3>
           </div>
-
           <FormRow field="input" handleChange={handleChange} type="text" name="name" label="Title" placeholder="HP, Toyota e.t.c" />
           <div className="form-group">
             <label htmlFor="category"> {" "} Category<span className="asterisk">*</span></label>
@@ -91,7 +89,6 @@ const PostAd = () => {
           <div className="submit-btn-wrapper">
             <button disabled={isLoading} className="button">{isLoading ? 'Loading...' : 'Post ad'}</button>
           </div>
-
         </form>
       </div>
     </section>

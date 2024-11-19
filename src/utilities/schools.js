@@ -1,10 +1,6 @@
 
 const locations = [
     {
-        label: "All Universities",
-        value: "ALL",
-    },
-    {
         label: "Federal University of Agriculture, Abeokuta",
         value: "FUNAAB",
     },
@@ -37,7 +33,7 @@ const locations = [
         value: "BUK",
     },
     {
-        label: "Obafemi Awolowo University,Ile-Ife",
+        label: "Obafemi Awolowo University, Ile-Ife",
         value: "OAU",
     },
     {
