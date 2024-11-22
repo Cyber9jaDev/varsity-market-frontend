@@ -19,7 +19,7 @@ const Register = () => {
     phone: '',
     userType: "BUYER",
     accountNumber: null,
-    bankName: null,
+    bankCode: null,
     businessName: null,
   });
 
@@ -70,11 +70,11 @@ const Register = () => {
                 <input placeholder='Phone number (8062128170)' onChange={handleChange} type="tel" name="phone" id="phone" required />
               </div>
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
-                <input placeholder='Account number' onChange={handleChange} type="text" name="accountNumber" id="accountNumber" required />
+                <input placeholder='Account umber' onChange={handleChange} type="text" name="accountNumber" id="accountNumber" required />
               </div>}
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
-                <select onChange={handleChange} defaultValue="044" name="bankName" id="bankName">
-                  {BankList.map(bank => <option value={bank.name} key={bank.slug}>{bank.name}</option>)}
+                <select onChange={handleChange} defaultValue="044" name="bankCode" id="bankCode">
+                  {BankList.map(bank => <option value={bank.code} key={bank.slug}>{bank.name}</option>)}
                 </select>
               </div>}
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
