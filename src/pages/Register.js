@@ -70,7 +70,7 @@ const Register = () => {
                 <input placeholder='Phone number (8062128170)' onChange={handleChange} type="tel" name="phone" id="phone" required />
               </div>
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
-                <input placeholder='Account umber' onChange={handleChange} type="text" name="accountNumber" id="accountNumber" required />
+                <input placeholder='Account number' onChange={handleChange} type="text" name="accountNumber" id="accountNumber" required />
               </div>}
               {formData.userType === "SELLER" && <div className="col-lg-6 col-sm-12 my-3">
                 <select onChange={handleChange} defaultValue="044" name="bankCode" id="bankCode">
