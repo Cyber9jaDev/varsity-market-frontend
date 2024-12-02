@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import './styles/checkout.scss';
 import formatNaira from 'format-to-naira';
+import PaymentService from '../services/PaymentService';
 
 const Checkout = () => {
   const { state } = useLocation();
@@ -11,15 +12,18 @@ const Checkout = () => {
     return <Navigate to='/' replace/>
   }
 
-  const initializePayment = (e) => {
+  console.log(state);
+  const initializePayment = async (e) => {
     e.preventDefault();
-    // Paystack transaction
-    if(e.target.getAttribute("name") === 'paystack'){
-      alert(1)
-    } 
-    // Flutterwave transaction
-    else{
-      alert(2)
+    try {
+      const { data } = await PaymentService.initializeTransaction({
+        productId: state.product.id,
+        quantity: Number(state.quantity),
+        // amount: state.totalAmount
+      })
+      console.log(data);
+    } catch (error) {
+      console.log(error.message);
     }
   }
 

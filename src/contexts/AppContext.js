@@ -1,12 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import {
-  POSTAD_BEGINS,
-  POSTAD_ERROR,
-  POSTAD_SUCCESS,
-  REGISTRATION_BEGINS,
-  REGISTRATION_ERROR,
-  REGISTRATION_SUCCESS,
-  SET_CURRENT_USER,
+import { POSTAD_BEGINS, POSTAD_ERROR, POSTAD_SUCCESS, REGISTRATION_BEGINS, REGISTRATION_ERROR, REGISTRATION_SUCCESS, SET_CURRENT_USER,
 } from "./Actions";
 import reducer from "./Reducer";
 import { displayAlert, refresh } from "../utilities/utils";
