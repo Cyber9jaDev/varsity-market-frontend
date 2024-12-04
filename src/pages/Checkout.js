@@ -1,27 +1,28 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import './styles/checkout.scss';
 import formatNaira from 'format-to-naira';
 import PaymentService from '../services/PaymentService';
 
 const Checkout = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
 
 // Protect the page by checking if the state exists
   if(!state || !state.product || !state.totalAmount){
     return <Navigate to='/' replace/>
   }
 
-  console.log(state);
   const initializePayment = async (e) => {
     e.preventDefault();
     try {
       const { data } = await PaymentService.initializeTransaction({
         productId: state.product.id,
         quantity: Number(state.quantity),
+        callback_url: "http://localhost:3000/verify-payment"
         // amount: state.totalAmount
-      })
-      console.log(data);
+      });
+      window.location.href = data.data.authorization_url
     } catch (error) {
       console.log(error.message);
     }

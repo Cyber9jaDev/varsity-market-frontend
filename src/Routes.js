@@ -12,6 +12,7 @@ import Product from './pages/Product';
 import Chat from './pages/Chat';
 import About from './pages/About';
 import Checkout from './pages/Checkout';
+import VerifyPayment from './pages/VerifyPayment';
 
 const RouterLinks = () => {
   return (
@@ -30,7 +31,7 @@ const RouterLinks = () => {
         <Route path='/post-ad' exact element={ <PrivateRoute> <PostAd/> </PrivateRoute> } />
         <Route path='/chat' exact element={<PrivateRoute> <Chat/></PrivateRoute> }/>
         <Route path='/checkout' exact element={<PrivateRoute> <Checkout/></PrivateRoute> }/>
-
+        <Route path='/verify-payment' exact element={<PrivateRoute> <VerifyPayment/></PrivateRoute> }/>
       </Routes>
       </BrowserRouter>
     </>
