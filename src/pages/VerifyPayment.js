@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./styles/verify-payment.scss";
 
 const VerifyPayment = () => {
+  const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false);
+  const [paymentData, setPaymentData] = useState({});
+
+  // const verifyPayment = await 
+
   return (
     <main id='verify-payment'>
       <div>
@@ -24,7 +30,7 @@ const VerifyPayment = () => {
         </div>
         <div className="row">
           <div className="col">
-            <span>Time/Date</span>
+            <span>Reference Number</span>
           </div>
           <div className="col">
               <span>January</span>
@@ -32,7 +38,7 @@ const VerifyPayment = () => {
         </div>
         <div className="row">
           <div className="col">
-            <span>Time/Date</span>
+            <span>Payment Method</span>
           </div>
           <div className="col">
               <span>January</span>
@@ -40,7 +46,7 @@ const VerifyPayment = () => {
         </div>
         <div className="row">
           <div className="col">
-            <span>Time/Date</span>
+            <span>Buyer Name</span>
           </div>
           <div className="col">
               <span>January</span>
@@ -48,7 +54,7 @@ const VerifyPayment = () => {
         </div>
         <div className="row">
           <div className="col">
-            <span>Time/Date</span>
+            <span>Amount</span>
           </div>
           <div className="col">
               <span>January</span>
@@ -56,7 +62,7 @@ const VerifyPayment = () => {
         </div>
         <div className="row">
           <div className="col">
-            <span>Time/Date</span>
+            <span>Quantity</span>
           </div>
           <div className="col">
               <span>January</span>
@@ -64,7 +70,7 @@ const VerifyPayment = () => {
         </div>
         <div className="row">
           <div className="col">
-            <span>Time/Date</span>
+            <span>Total</span>
           </div>
           <div className="col">
               <span>January</span>
