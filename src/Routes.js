@@ -25,12 +25,12 @@ const RouterLinks = () => {
           <Route exact path='profile' element={<PrivateRoute><Profile/></PrivateRoute>} />
           <Route path=':category/:id' exact element={<ProductPreview/>}/>
           <Route path='products' exact element={<PrivateRoute> <Product/></PrivateRoute> }/>
+          <Route path='/checkout' exact element={<PrivateRoute> <Checkout/></PrivateRoute> }/>
         </Route>
         <Route path='/register' exact element={ <Register/> }/>
         <Route path='/login' exact element={ <Login/> }/>
         <Route path='/post-ad' exact element={ <PrivateRoute> <PostAd/> </PrivateRoute> } />
         <Route path='/chat' exact element={<PrivateRoute> <Chat/></PrivateRoute> }/>
-        <Route path='/checkout' exact element={<PrivateRoute> <Checkout/></PrivateRoute> }/>
         <Route path='/verify-payment' exact element={<PrivateRoute> <VerifyPayment/></PrivateRoute> }/>
       </Routes>
       </BrowserRouter>
