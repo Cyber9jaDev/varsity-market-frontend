@@ -7,7 +7,7 @@ export default class PaymentService {
     return await APICall(`${this.baseUrl}/payment/initialize`, 'POST', payload);
   }
 
-  static async verifyTransaction(){
-    return await APICall(`${this.baseUrl}/payment/initialize`, 'GET', {});
+  static async verifyTransaction(reference){
+    return await APICall(`${this.baseUrl}/payment/verify/${reference}`, 'GET', {});
   }
 }

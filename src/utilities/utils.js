@@ -62,7 +62,6 @@ export const findCategory = (value, values) => {
   return values.defaultCategory;
 };
 
-
 export const findSchool = (value, values) => {
   const school = schools.find((school) => school.value === value);
   if (school) {
