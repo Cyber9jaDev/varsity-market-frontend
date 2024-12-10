@@ -40,4 +40,4 @@ const VerifyPayment = () => {
   )
 }
 
-export default VerifyPayment
+export default VerifyPayment;

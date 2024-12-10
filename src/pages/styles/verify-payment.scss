@@ -160,42 +160,5 @@
     }
   }
 
-
-  @media print {
-    .successful-payment {
-      padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  
-    .receipt-details {
-      margin: 20px 0;
-      border: 1px solid #ddd;
-      padding: 15px;
-    }
-  
-    .row {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
-    }
-  
-    .col {
-      flex: 1;
-      padding: 5px;
-    }
-  
-    h1 {
-      text-align: center;
-      color: #4caf50;
-    }
-  
-    h4 {
-      text-align: center;
-      color: #666;
-    }
-  }
-  
 }
 
