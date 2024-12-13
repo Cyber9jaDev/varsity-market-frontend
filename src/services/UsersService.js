@@ -1,22 +1,15 @@
 import APICall from "../utilities/APICall";
 
 export default class UsersService {
-  // static Registration_key = async (payload) => {
-  //   return await APICall('/auth/registration-key', 'POST', payload)
-  // }
-
-  static baseUrl = "http://localhost:3001"
-
   static Register = async (payload) => {
-    console.log(payload);
     const userType = payload?.userType;
     delete payload.userType;
-    return await APICall(`${this.baseUrl}/auth/signup/${userType}`, 'POST', payload);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/auth/signup/${userType}`, 'POST', payload);
   }
 
   static Login = async (payload) => {
-    // return await APICall(`${this.baseUrl}/auth/signin`, 'POST', payload);
-    return await APICall(`http://localhost:3001/auth/signin`, 'POST', payload);
+    // return await APICall(`${process.env.REACT_APP_BASE_URL}/auth/signin`, 'POST', payload);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/auth/signin`, 'POST', payload);
   }
 
   static PostAd = async ({ category, description, price, condition, name, location, quantity, images }) => {
@@ -35,27 +28,27 @@ export default class UsersService {
 
     console.log(quantity);
 
-    return await APICall(`${this.baseUrl}/products/add-product`, 'POST', formData);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/products/add-product`, 'POST', formData);
 
   }
 
   static getUser = async (userId) => {
-    return await APICall(`${this.baseUrl}user/${userId}`, 'GET');
+    return await APICall(`${process.env.REACT_APP_BASE_URL}user/${userId}`, 'GET');
   }
 
   static getUserAds = async (userId) => {
-    return await APICall(`${this.baseUrl}api/user-ads/id/${userId}`, 'GET');
+    return await APICall(`${process.env.REACT_APP_BASE_URL}api/user-ads/id/${userId}`, 'GET');
   }
 
   static deleteAd = async (productId) => {
-    return await APICall(`${this.baseUrl}api/user-ads/id/${productId}`, 'DELETE')
+    return await APICall(`${process.env.REACT_APP_BASE_URL}api/user-ads/id/${productId}`, 'DELETE')
   }
 
   static uploadProfilePicture = async (userId, payload) => {
-    return await APICall(`${this.baseUrl}api/upload-profile-picture/${userId}`, 'PATCH', payload);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}api/upload-profile-picture/${userId}`, 'PATCH', payload);
   }
 
   static updateUserProfile = async (payload) => {
-    return await APICall(`${this.baseUrl}api/update-user-info`, 'PATCH', payload);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}api/update-user-info`, 'PATCH', payload);
   }
 }

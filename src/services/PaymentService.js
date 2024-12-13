@@ -1,13 +1,11 @@
 import APICall from "../utilities/APICall";
 
 export default class PaymentService {
-  static baseUrl = "http://localhost:3001"
-
   static async initializeTransaction(payload){
-    return await APICall(`${this.baseUrl}/payment/initialize`, 'POST', payload);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/payment/initialize`, 'POST', payload);
   }
 
   static async verifyTransaction(reference){
-    return await APICall(`${this.baseUrl}/payment/verify/${reference}`, 'GET', {});
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/payment/verify/${reference}`, 'GET', {});
   }
 }
