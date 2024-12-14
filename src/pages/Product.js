@@ -134,7 +134,6 @@ const Product = () => {
             }
 
             {/* Filter form */}
-
             <form className="form" onSubmit={getProducts}>
               <div className="container">
                 <div className="row">
@@ -229,8 +228,8 @@ const Product = () => {
                 </div>
               </div>
               {/* Products */}
-              {isLoading === true ? <Loading /> : isLoading === false && hasError === true ? <Error /> :
-                isLoading === false && hasError === false && values.products?.length === 0 ? <Empty /> : <div className="container mt-3">
+              { isLoading ? <Loading /> : (!isLoading && hasError) ? <Error /> :
+                (!isLoading && !hasError && values.products?.length === 0) ? <Empty /> : <div className="container mt-3">
                   <div className="row products-container">
                     {products?.map(product => <ProductCard view={view} category={product.category} key={product.id} {...product} />)}
                   </div>

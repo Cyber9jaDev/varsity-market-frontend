@@ -22,13 +22,15 @@ const VerifyPayment = () => {
         setPaymentData({ ...data });
       }
       catch (error) {
-        console.log(error);
         setHasError(true);
       }
       setIsLoading(false);
     }
-    verifyPayment();
-  }, []);
+
+    if(reference){
+      verifyPayment();
+    }
+  }, [reference]);
 
   return (
     <main id='verify-payment'>
