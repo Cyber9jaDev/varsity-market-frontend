@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import './styles/profile.scss';
 import avatar from '../assets/avatar.jpg';
 import UsersService from '../services/UsersService';
-import UserAds from '../components/UserAds';
 import Menu from '../utilities/menu';
-import Settings from '../components/Settings';
-import ComingSoon from '../components/ComingSoon';
+import UserAds from '../components/profile/UserAds';
+import ComingSoon from '../components/profile/ComingSoon';
+import Settings from '../components/profile/Settings';
 // import Loading from '../components/Loading';
 
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));

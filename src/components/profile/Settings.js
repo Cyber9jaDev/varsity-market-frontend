@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import avatar from '../assets/profile.png';
+import avatar from '../../assets/profile.png';
 import Select from 'react-select';
-import schools from '../utilities/schools';
-import { displayAlert, findSchoolByCode, refresh } from '../utilities/utils';
-import UsersService from '../services/UsersService';
+import schools from '../../utilities/schools';
+import { displayAlert, findSchoolByCode, refresh } from '../../utilities/utils';
+import UsersService from '../../services/UsersService';
 
 const Settings = ({ currentUser }) => {
   const [ profile, setProfile ] = useState({ ...currentUser });

@@ -1,10 +1,10 @@
 import React from 'react';
-import img from '../assets/campus4.jpg';
+import img from '../../assets/campus4.jpg';
 import formatNaira from "format-to-naira";
-import UsersService from '../services/UsersService';
-import { convertDate, displayAlert, refresh } from '../utilities/utils';
-import Loading from './Loading';
-import Error from './Error';
+import UsersService from '../../services/UsersService';
+import { convertDate, displayAlert, refresh } from '../../utilities/utils';
+import Loading from '../Loading';
+import Error from '../Error';
 
 const UserAds = ({ userAds, isLoading, hasError, screenWidth }) => {
 

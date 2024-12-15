@@ -38,7 +38,7 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem("currentUser");
   };
 
-  const register = async ({ name, email, password, confirmPassword, phone, userType, businessName, accountNumber, bankName }) => {
+  const register = async ({ name, email, password, confirmPassword, phone, userType, businessName, accountNumber, bankCode }) => {
     dispatch({ type: REGISTRATION_BEGINS });
 
     if (!name || !email || !password || !confirmPassword || !phone || !userType) {
@@ -52,7 +52,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await UsersService.Register({ email, password, name, phone, userType, businessName, accountNumber, bankName });
+      const { data } = await UsersService.Register({ email, password, name, phone, userType, businessName, accountNumber, bankCode });
       saveUserToLocalStorage(data);
       dispatch({ type: REGISTRATION_SUCCESS });
       dispatch({ type: SET_CURRENT_USER, payload: { ...data } });
