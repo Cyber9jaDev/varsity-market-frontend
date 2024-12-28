@@ -110,8 +110,9 @@ export const orderBy = [
 ]
 
 export const displayAlert = (alertType, alertText) => {
-  if (alertType === 'success') toast.success(alertText);
-  else if (alertType === 'error') toast.error(alertText);
+  if (alertType === 'success') return toast.success(alertText);
+  else if (alertType === 'loading') return toast.loading(alertText);
+  else return toast.error(alertText);
 }
 
 export const refresh = () => {

@@ -7,6 +7,7 @@ import UsersService from '../../services/UsersService';
 
 const Settings = ({ currentUser }) => {
   const [ profile, setProfile ] = useState({ ...currentUser });
+  const [isLoading, setIsLoading] = useState(false);
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -23,43 +24,30 @@ const Settings = ({ currentUser }) => {
 
   const changeDisplayPicture = async (e) => {
     const file = [e.target.files[0]][0];
-
     if(!file){ return }; // No file is chosen
-
     if(file.size > 270000) {
       return displayAlert('error', 'File size must not be greater than 270kb');
     }
 
-    // convert image to base 64
-    const base64Image = new FileReader();
-    base64Image.readAsDataURL(file);
-    return (base64Image.onloadend = async () => {
-      const body = { image: base64Image.result, userId: currentUser.userId }
-      try {
-        const { data } = await UsersService.uploadProfilePicture(currentUser.userId, body);
-        localStorage.setItem('currentUser', JSON.stringify({...currentUser, displayPicture: data.displayPicture, hasDisplayPicture: data.hasDisplayPicture }));
+    try {
+        displayAlert('loading', 'We are uploading your picture, please wait');
+        const { data } = await UsersService.uploadProfilePicture(file);
+        localStorage.setItem('currentUser', JSON.stringify({
+          ...currentUser, 
+          hasDisplayPicture: data.hasDisplayPicture, 
+          displayPicture: {
+            secure_url: data.secure_url,
+          }, 
+        }));
         displayAlert('success', 'Picture uploaded successfully');
         return refresh();
       } catch (error) {
         return displayAlert("error", 'An error occurred while uploading the picture');
       }
-    })
   }
 
   return (
     <section id='settings'>
-      {/* <header className="top-header-container">
-        <div className="header-text-wrapper">
-          <h2>Personal details</h2>
-        </div>
-        <div className="data-wrapper d-flex justify-content-between align-items-center">
-          <div className="all adverts-wrapper">
-            <span className="text">Saved</span>
-          </div>
-          
-        </div>
-      </header> */}
-
       <div className="settings-container">
         <div onSubmit={changeDisplayPicture} className="display-picture-wrapper">
           <label htmlFor="display-picture">

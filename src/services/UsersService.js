@@ -25,11 +25,7 @@ export default class UsersService {
     for (let i = 0; i < images.length; i++) {
       formData.append('productImages', images[i]);
     }
-
-    console.log(quantity);
-
     return await APICall(`${process.env.REACT_APP_BASE_URL}/products/add-product`, 'POST', formData);
-
   }
 
   static getUser = async (userId) => {
@@ -44,8 +40,10 @@ export default class UsersService {
     return await APICall(`${process.env.REACT_APP_BASE_URL}/products/delete/${productId}`, 'DELETE')
   }
 
-  static uploadProfilePicture = async (userId, payload) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}api/upload-profile-picture/${userId}`, 'PATCH', payload);
+  static uploadProfilePicture = async (file) => {
+    let formData = new FormData();
+    formData.append("profilePicture", file)
+    return await APICall(`${process.env.REACT_APP_LOCAL_HOST}/user/upload/profile-picture`, 'PATCH', formData);
   }
 
   static updateUserProfile = async (payload) => {

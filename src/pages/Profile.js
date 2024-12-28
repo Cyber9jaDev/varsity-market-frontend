@@ -9,7 +9,6 @@ import Settings from '../components/profile/Settings';
 // import Loading from '../components/Loading';
 
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-console.log(currentUser);
 
 const Profile = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
