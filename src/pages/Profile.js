@@ -9,6 +9,7 @@ import Settings from '../components/profile/Settings';
 // import Loading from '../components/Loading';
 
 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+console.log(currentUser);
 
 const Profile = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -28,8 +29,7 @@ const Profile = () => {
     setIsLoading(true);
     setHasError(false);
     try {
-      const { data } = await UsersService.getUserAds(currentUser.userId);
-      console.log(data);
+      const { data } = await UsersService.getUserAds(currentUser.id);
       setUserAds(data);
     } catch (error) {
       setHasError(true);
@@ -50,11 +50,12 @@ const Profile = () => {
           <div className={`left-container ${screenWidth < 768 && hideActiveMenu ? '' : 'hide'} `}>
             <div className="profile-container">
               <div className="profile-picture-wrapper">
-                <img className='profile-picture' src={currentUser.hasDisplayPicture ? currentUser.displayPicture.url : avatar} alt="" />
+                <img className='profile-picture' src={currentUser.hasDisplayPicture ? currentUser.displayPicture.secure_url : avatar} alt="" />
               </div>
               <p className="name text-center w-100 my-2">{currentUser.name}</p>
               <p className="phone-number text-center w-100 mt-2">{currentUser.phone}</p>
             </div>
+
 
             <div className="menu-container">
               {

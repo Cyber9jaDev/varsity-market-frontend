@@ -7,7 +7,6 @@ import Loading from '../Loading';
 import Error from '../Error';
 
 const UserAds = ({ userAds, isLoading, hasError, screenWidth }) => {
-
   const deleteAdvert = async (id) => {
     try {
       await UsersService.deleteAd(id);
@@ -35,15 +34,6 @@ const UserAds = ({ userAds, isLoading, hasError, screenWidth }) => {
               <span className="count">{ userAds.length || 0 }</span>
             </div>
           </div>
-          {/* <div className="active adverts-wrapper"> 
-            <div className="icon-wrapper d-flex align-items-center">
-              <FontAwesomeIcon className='icon' icon={faCheckCircle}/>                  
-            </div>
-            <span className="text">All</span>
-            <div className="count-wrapper">
-              <span className="count">{userAds.length}</span>
-            </div>
-          </div> */}
         </div>
       </header>
 
@@ -52,25 +42,33 @@ const UserAds = ({ userAds, isLoading, hasError, screenWidth }) => {
         isLoading ? <Loading /> 
           : !isLoading && hasError ? <Error /> 
           : 
-          userAds.map(ad => <div key={ad._id} className="ad-wrapper">
-          <div className="img-container">
-            <div className="img-wrapper">
-              <img src={ad ? ad.images[0].url : img } alt="" className="img" />
-            </div>
-          </div>
+          userAds
+            .filter(ad => ad.quantity > 0)
+            .map(ad => {
+              return(
+                <div key={ad.id} className="ad-wrapper">
+                  <div className="img-container">
+                    <div className="img-wrapper">
+                      <img src={ad ? ad.images[0].secure_url : img } alt="product image" className="img" />
+                    </div>
+                  </div>
+                  <div className="info-container px-3">
+                    <span className='name'>{ad.name}</span>
+                    <span className="price">{formatNaira(ad.price)}</span>
+                    <span className="date">{convertDate(ad.createdAt).date}</span>
+                  </div>
 
-          <div className="info-container px-3">
-            <span className='name'>{ad.name}</span>
-            <span className="price">{formatNaira(ad.price)}</span>
-            <span className="date">{convertDate(ad.createdAt).date}</span>
-          </div>
-
-          <div className="action-container">
-            <div className="action-wrapper delete">
-              <button onClick={() => deleteAdvert(ad._id)} className='btn'><i class="fa-solid fa-trash-can icon"></i> <span>Delete</span></button>
-            </div>
-          </div>
-        </div>)
+                  <div className="action-container">
+                    <div className="action-wrapper delete">
+                      <button onClick={() => deleteAdvert(ad.id)} className='btn'>
+                        {/* <i class="fa-solid fa-trash-can icon"></i>  */}
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })
         }
       </div>
 

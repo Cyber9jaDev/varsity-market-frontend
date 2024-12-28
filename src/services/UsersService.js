@@ -33,15 +33,15 @@ export default class UsersService {
   }
 
   static getUser = async (userId) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}user/${userId}`, 'GET');
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/user/${userId}`, 'GET');
   }
 
   static getUserAds = async (userId) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}api/user-ads/id/${userId}`, 'GET');
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/products/user-ads/${userId}`, 'GET');
   }
 
   static deleteAd = async (productId) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}api/user-ads/id/${productId}`, 'DELETE')
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/products/delete/${productId}`, 'DELETE')
   }
 
   static uploadProfilePicture = async (userId, payload) => {

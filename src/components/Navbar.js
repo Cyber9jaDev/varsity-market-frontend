@@ -24,7 +24,7 @@ const Navbar = ({ toggleDropdown, setToggleDropdown }) => {
           <ul>
             { currentUser && <li onClick={() => setToggleDropdown(!toggleDropdown)} className="profile toggle">
                 <span to="/profile" className="nav-link"> {" "} 
-                  <img className="profile-image toggle" src={currentUser.hasDisplayPicture ? currentUser.displayPicture.url : img} alt="profile-img" />
+                  <img className="profile-image toggle" src={currentUser.hasDisplayPicture ? currentUser.displayPicture.secure_url : img} alt="profile-img" />
                 </span>
               </li>
             }

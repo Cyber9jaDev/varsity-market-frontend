@@ -64,7 +64,7 @@ const Settings = ({ currentUser }) => {
         <div onSubmit={changeDisplayPicture} className="display-picture-wrapper">
           <label htmlFor="display-picture">
             <div className='display-picture-img-wrapper'>
-              <img src={ currentUser.hasDisplayPicture ? currentUser.displayPicture.url : avatar } alt="display-pic" />
+              <img src={ currentUser.hasDisplayPicture ? currentUser.displayPicture.secure_url : avatar } alt="display-pic" />
               <div className="icon-wrapper">
                 <i className="fa-solid fa-pen-to-square"></i>
               </div>
