@@ -78,7 +78,7 @@ const Settings = ({ currentUser }) => {
             <input onChange={(e) => setProfile({ ...profile, phone: e.target.value })} defaultValue={ currentUser.phone }  type='tel' />
           </fieldset>
           <div className="my-4 submit-btn-wrapper">
-            <input className='submit-btn w-100 p-2' type="submit" value="Save" />
+            <input className='submit-btn w-100 p-2' type="submit" value="Update" />
           </div>
         </form>
       </div>

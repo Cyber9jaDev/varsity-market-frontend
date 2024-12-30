@@ -2,7 +2,7 @@
   width: 100%;
   position: relative;
   height: 100%;
-  min-height: calc(100vh - 25vh);
+  min-height: calc(100vh - 23vh);
   font-family: 'Roboto', sans-serif;
   background-color: #fff;
   top: 10vh;
@@ -112,7 +112,6 @@
       padding: 10px;
       justify-content: space-between;
       box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 1px rgba(0, 0, 0, 0.19);
-      // background-color: red;
       padding: 10px;
       border-top: 1px solid #d0c1c1;
     }
@@ -138,7 +137,6 @@
       opacity: 0.4;
       color: white;
       border-radius: 5px;
-      // cursor: pointer;
       background-color:rgb(0, 167, 0) !important; 
     }
 
@@ -260,12 +258,12 @@
     .settings-container{
       width: 400px;
       display: block;
-      margin: 20px auto;
+      margin: 0 auto;
     }
 
     .display-picture-wrapper{
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       margin: 0 auto;
     }
 
@@ -286,8 +284,8 @@
       position: absolute;
       right: 10px;
       bottom: 10px;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -306,8 +304,8 @@
     }
 
     .display-picture-img-wrapper > img{
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
     }
 
@@ -319,28 +317,29 @@
     fieldset {
       border: 1px solid rgb(193, 207, 215);
       padding: 5px 10px;
-      border-radius: 5px;
-      margin: 15px 0;
+      border-radius: 2px;
+      margin: 10px 0;
     }
     
     fieldset > legend{
       float: none;
       width: auto;
-      font-size: 1.2rem;
+      font-size: 13px;
       color: rgb(29, 130, 29);
     }
   
     fieldset > input{
       border: none;
       outline: none;
-      font-size: 1rem;
+      font-size: 14px;
       width: 100%;
       display: block;
-      height: 30px;
+      height: 15px;
     }
 
     input[type='submit']{
-      border: none;
+      border: 1px solid;
+      border-radius: 7px;
       outline: none;
       color: white;
       opacity: 0.7;
