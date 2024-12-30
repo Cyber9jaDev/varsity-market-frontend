@@ -1,7 +1,7 @@
 export default function Menu (){
   return [
     {
-      label: 'My adverts',
+      label: 'Adverts',
       name: 'adverts',
       icon: "fa-solid fa-list"
     },

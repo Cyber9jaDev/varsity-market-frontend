@@ -18,11 +18,9 @@ const UserAds = ({ userAds, isLoading, hasError, screenWidth }) => {
   }
 
   return (
-    // <section className={`${screenWidth <= 768 && }`}>
-    <section className={`${screenWidth <= 768 ? '' : '' }`}>
+    <section id='adverts' className={`${screenWidth <= 768 ? '' : '' }`}>
       <header className="top-header-container">
         <div className="header-text-wrapper">
-          <h2>My adverts</h2>
         </div>
         <div className="data-wrapper d-flex justify-content-between align-items-center">
           <div className="all adverts-wrapper">
@@ -37,7 +35,7 @@ const UserAds = ({ userAds, isLoading, hasError, screenWidth }) => {
         </div>
       </header>
 
-      <div className="ads-container pt-3">
+      <div className="ads-container">
         { 
         isLoading ? <Loading /> 
           : !isLoading && hasError ? <Error /> 
@@ -71,8 +69,6 @@ const UserAds = ({ userAds, isLoading, hasError, screenWidth }) => {
             })
         }
       </div>
-
-
     </section>
   )
 }
