@@ -26,6 +26,18 @@
     box-shadow: 1px 1px 9px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00000030;
   }
 
+  form > .back-btn-wrapper{
+    .back-btn{
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #01a185;
+    }
+  }
+
   form > .submit-btn-wrapper,
   form > .textarea-wrapper,
   form > .header-text-wrapper {
@@ -63,20 +75,20 @@
   }
 
   label {
-    font-size: 14px;
+    font-size: 12px;
     font-family: "Source Sans Pro", sans-serif;
     color: #393434;
     letter-spacing: 0.25px;
     font-weight: 500;
   }
   select, option, ::placeholder{
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .input,
   select,
   textarea {
-    height: 45px;
+    height: 40px;
     outline: none;
     border: 0.001px solid lightblue;
     letter-spacing: 0.25px;
@@ -86,7 +98,7 @@
   }
 
   textarea {
-    height: 95px !important;
+    height: 90px !important;
     resize: none;
     font-size: 14px;
   }
@@ -112,13 +124,13 @@
     height: 40px;
     background: #01a185;
     font-weight: 500;
-    font-size: 1em;
+    font-size: 0.91rem;
     letter-spacing: 0.005em;
     color: #fff;
     text-transform: uppercase;
 
     &:hover {
-      background: #01a185;
+      background: rgb(24, 143, 123);
       color: #fff;
     }
   }

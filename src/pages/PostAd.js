@@ -58,6 +58,11 @@ const PostAd = () => {
     <section id="post-ad">
       <div className="post-ad-wrapper">
         <form className="form-control" onSubmit={handleSubmit}>
+          <div className="back-btn-wrapper">
+            <button className="back-btn" onClick={() => navigate("/")}>
+              <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </button>
+          </div>
           <div className="header-text-wrapper">
             <h3 className="header-text">Post an ad</h3>
           </div>
