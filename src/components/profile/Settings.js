@@ -65,14 +65,11 @@ const Settings = ({ currentUser }) => {
             <legend>Name</legend>
             <input onChange={(e) => setProfile({ ...profile, name: e.target.value })} defaultValue={ currentUser.name } type="text" />
           </fieldset>
-          <fieldset>
-            <legend>Email</legend>
-            <input readOnly onChange={(e) => setProfile({ ...profile, email: e.target.value })} defaultValue={ currentUser.email } type="text" />
-          </fieldset>
-          <fieldset>
+          {/* /}
+          {/* <fieldset>
             <legend>School</legend>
             <Select onChange={(e) => setProfile({ ...profile, school: e.value })} defaultValue={ findSchoolByCode(currentUser.school) } isSearchable options={schools.slice(1)} />
-          </fieldset>
+          </fieldset> */}
           <fieldset>
             <legend className=''>Phone number</legend>
             <input onChange={(e) => setProfile({ ...profile, phone: e.target.value })} defaultValue={ currentUser.phone }  type='tel' />
