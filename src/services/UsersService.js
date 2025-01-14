@@ -43,10 +43,10 @@ export default class UsersService {
   static uploadProfilePicture = async (file) => {
     let formData = new FormData();
     formData.append("profilePicture", file)
-    return await APICall(`${process.env.REACT_APP_LOCAL_HOST}/user/upload/profile-picture`, 'PATCH', formData);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}/user/upload/profile-picture`, 'PATCH', formData);
   }
 
   static updateUserProfile = async (payload) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}api/update-user-info`, 'PATCH', payload);
+    return await APICall(`${process.env.REACT_APP_BASE_URL}api/update-user-info`, 'PUT', payload);
   }
 }
