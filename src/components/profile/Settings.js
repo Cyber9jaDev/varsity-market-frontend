@@ -71,6 +71,10 @@ const Settings = ({ currentUser }) => {
             <legend className=''>Business Name</legend>
             <input onChange={(e) => setProfile({ ...profile, phone: e.target.value })} defaultValue={currentUser.phone} type='tel' />
           </fieldset>
+          <fieldset>
+            <legend className=''>Account Number</legend>
+            <input onChange={(e) => setProfile({ ...profile, phone: e.target.value })} defaultValue={currentUser.phone} type='tel' />
+          </fieldset>
           <select defaultValue="044" name="bankCode" id="bankCode">
             {BankList.map(bank => <option value={bank.code} key={bank.slug}>{bank.name}</option>)}
           </select>
