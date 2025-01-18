@@ -77,7 +77,6 @@ const Settings = ({ currentUser }) => {
           </fieldset>
           <select defaultValue="044" name="bankCode" id="bankCode">
             {BankList.map(bank => <option value={bank.code} key={bank.slug}>{bank.name}</option>)}
-            {BankList.map(bank => <option value={bank.code} key={bank.slug}>{bank.name}</option>)}
           </select>
           <div className="my-4 submit-btn-wrapper">
             <input className='submit-btn w-100 p-2' type="submit" value="Update" />
