@@ -1,19 +1,16 @@
 import APICall from "../utilities/APICall";
 
 export default class UsersService {
-
-  static baseUrl = process.env.REACT_APP_BASE_URL;
+  static baseUrl = "https://sore-deborah-cyber9ja-1bb31953.koyeb.app";
 
   static Register = async (payload) => {
     const userType = payload?.userType;
     delete payload.userType;
-    return await APICall(`${process.env.REACT_APP_BASE_URL}/auth/signup/${userType}`, 'POST', payload);
+    return await APICall(`${this.baseUrl}/auth/signup/${userType}`, 'POST', payload);
   }
 
   static Login = async (payload) => {
-    // return await APICall(`${process.env.REACT_APP_BASE_URL}/auth/signin`, 'POST', payload);
-    return await APICall(`${this.baseUrl}/auth/signin`, 'POST', payload);
-    // return await APICall("https://sore-deborah-cyber9ja-1bb31953.koyeb.app/auth/signin", 'POST', payload);
+    return await APICall(`${this.bas}/auth/signin`, 'POST', payload);
   }
 
   static PostAd = async ({ category, description, price, condition, name, location, quantity, images }) => {
