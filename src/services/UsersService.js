@@ -26,28 +26,28 @@ export default class UsersService {
     for (let i = 0; i < images.length; i++) {
       formData.append('productImages', images[i]);
     }
-    return await APICall(`${process.env.REACT_APP_BASE_URL}/products/add-product`, 'POST', formData);
+    return await APICall(`${this.baseUrl}/products/add-product`, 'POST', formData);
   }
 
   static getUser = async (userId) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}/user/${userId}`, 'GET');
+    return await APICall(`${this.baseUrl}/user/${userId}`, 'GET');
   }
 
   static getUserAds = async (userId) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}/products/user-ads/${userId}`, 'GET');
+    return await APICall(`${this.baseUrl}/products/user-ads/${userId}`, 'GET');
   }
 
   static deleteAd = async (productId) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}/products/delete/${productId}`, 'DELETE')
+    return await APICall(`${this.baseUrl}/products/delete/${productId}`, 'DELETE')
   }
 
   static uploadProfilePicture = async (file) => {
     let formData = new FormData();
     formData.append("profilePicture", file)
-    return await APICall(`${process.env.REACT_APP_BASE_URL}/user/upload/profile-picture`, 'PATCH', formData);
+    return await APICall(`${this.baseUrl}/user/upload/profile-picture`, 'PATCH', formData);
   }
 
   static updateUserProfile = async (payload) => {
-    return await APICall(`${process.env.REACT_APP_BASE_URL}api/update-user-info`, 'PUT', payload);
+    return await APICall(`${this.baseUrl}api/update-user-info`, 'PUT', payload);
   }
 }
