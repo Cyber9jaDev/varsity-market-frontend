@@ -10,7 +10,7 @@ export default class UsersService {
   }
 
   static Login = async (payload) => {
-    return await APICall(`${this.bas}/auth/signin`, 'POST', payload);
+    return await APICall(`${this.baseUrl}/auth/signin`, 'POST', payload);
   }
 
   static PostAd = async ({ category, description, price, condition, name, location, quantity, images }) => {
