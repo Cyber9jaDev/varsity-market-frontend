@@ -8,6 +8,7 @@ export default class UsersService {
   }
 
   static Login = async (payload) => {
+    console.log(process.env.REACT_APP_BASE_URL);
     // return await APICall(`${process.env.REACT_APP_BASE_URL}/auth/signin`, 'POST', payload);
     return await APICall(`${process.env.REACT_APP_BASE_URL}/auth/signin`, 'POST', payload);
   }

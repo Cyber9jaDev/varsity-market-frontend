@@ -12,6 +12,8 @@ export default async function APICall(url, method, data) {
 
   let response = await axios({ method, url, data });
 
+  console.log(url);
+
   if(response){
     if (!response.status || response.status === 0) {
       displayAlert("error", "Sorry it seems you are not connected to internet. Please check you network connection and try again");
