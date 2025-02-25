@@ -29,10 +29,8 @@ const Settings = ({ currentUser }) => {
       return
     }
 
-    console.log(payload);
     try {
       const { data } = await UsersService.updateProfile(currentUser.id, payload);
-      console.log(data);
       displayAlert('success', 'Profile updated successfully');
       localStorage.setItem('currentUser', JSON.stringify({ ...data }));
       refresh();
