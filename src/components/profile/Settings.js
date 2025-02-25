@@ -11,7 +11,7 @@ const Settings = ({ currentUser }) => {
     e.preventDefault();
     const payload = { userId: currentUser.userId, name: profile.name, phone: profile.phone, school: profile.school };
     try {
-      const { data } = await UsersService.updateUserProfile(payload);
+      const { data } = await UsersService.updateProfile(payload);
       displayAlert('success', 'Profile updated successfully');
       localStorage.setItem('currentUser', JSON.stringify({ ...currentUser, name: data.updatedName, phone: data.updatedPhone, school: data.updatedSchool }))
       refresh();

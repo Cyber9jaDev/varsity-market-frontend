@@ -44,10 +44,10 @@ export default class UsersService {
   static uploadProfilePicture = async (file) => {
     let formData = new FormData();
     formData.append("profilePicture", file)
-    return await APICall(`${this.baseUrl}/user/upload/profile-picture`, 'PATCH', formData);
+    return await APICall(`${this.baseUrl}/user/upload/picture`, 'PATCH', formData);
   }
 
-  static updateUserProfile = async (payload) => {
+  static updateProfile = async (payload) => {
     // return await APICall(`${this.baseUrl}/api/update-user-info`, 'PUT', payload);
     return await APICall(`${this.baseUrl}/user/update`, 'PUT', payload);
   }
