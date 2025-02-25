@@ -9,12 +9,32 @@ const Settings = ({ currentUser }) => {
 
   const updateProfile = async (e) => {
     e.preventDefault();
-    const payload = { userId: currentUser.userId, name: profile.name, phone: profile.phone, school: profile.school };
+
+    const name = ((profile.name !== currentUser.name) && profile.name.length >= 1) ? profile.name : undefined;
+    const phone = (profile.phone !== currentUser.phone) ? profile.phone : undefined;
+    const businessName = profile.businessName !== currentUser.businessName ? profile.businessName : undefined;
+    const accountNumber = profile.accountNumber !== currentUser.accountNumber ? profile.accountNumber : undefined;
+    const bankCode = profile.bankCode !== currentUser.bankCode ? profile.bankCode : undefined;
+
+    const payload = {
+      ...(name && { name }),
+      ...(phone && { phone }),
+      ...(businessName && { businessName }),
+      ...(accountNumber && { accountNumber }),
+      ...(bankCode && { bankCode })
+    };
+
+    // If no changes made, ensure the user is not updated
+    if (Object.keys(payload).length === 0) {
+      return
+    }
+
+    console.log(payload);
     try {
-      const { data } = await UsersService.updateProfile(payload);
+      // const { data } = await UsersService.updateProfile(currentUser.id, payload);
       displayAlert('success', 'Profile updated successfully');
-      localStorage.setItem('currentUser', JSON.stringify({ ...currentUser, name: data.updatedName, phone: data.updatedPhone, school: data.updatedSchool }))
-      refresh();
+      // localStorage.setItem('currentUser', JSON.stringify({ ...currentUser, name: data.updatedName, phone: data.updatedPhone, school: data.updatedSchool }))
+      // refresh();
     } catch (error) {
       displayAlert('error', error.response.data.message);
     }
@@ -61,23 +81,23 @@ const Settings = ({ currentUser }) => {
         <form onSubmit={updateProfile}>
           <fieldset>
             <legend>Name</legend>
-            <input onChange={(e) => setProfile({ ...profile, name: e.target.value })} defaultValue={currentUser.name} type="text" />
+            <input name='name' defaultValue={profile.name || ""} type="text" onChange={(e) => setProfile({ ...profile, name: e.target.value.trim() })} />
           </fieldset>
           <fieldset>
-            <legend className=''>Phone number</legend>
-            <input onChange={(e) => setProfile({ ...profile, phone: e.target.value })} defaultValue={currentUser.phone} type='tel' />
+            <legend>Phone number</legend>
+            <input name='phone' defaultValue={profile.phone || ""} type='tel' onChange={(e) => setProfile({ ...profile, phone: e.target.value.trim() })} />
           </fieldset>
-          <fieldset>
-            <legend className=''>Business Name</legend>
-            <input onChange={(e) => setProfile({ ...profile, phone: e.target.value })} defaultValue={currentUser.phone} type='tel' />
-          </fieldset>
-          <fieldset>
-            <legend className=''>Account Number</legend>
-            <input onChange={(e) => setProfile({ ...profile, phone: e.target.value })} defaultValue={currentUser.phone} type='tel' />
-          </fieldset>
-          <select defaultValue="044" name="bankCode" id="bankCode">
-            {BankList.map(bank => <option value={bank.code} key={bank.slug}>{bank.name}</option>)}
-          </select>
+          {currentUser.userType === "SELLER" && <fieldset>
+            <legend>Business Name</legend>
+            <input name='businessName' defaultValue={profile.businessName || ""} type='text' onChange={(e) => setProfile({ ...profile, businessName: e.target.value.trim() })} />
+          </fieldset>}
+          {currentUser.userType === "SELLER" && <fieldset>
+            <legend>Account Number</legend>
+            <input name='accountNumber' defaultValue={profile.accountNumber || ""} type='text' onChange={(e) => setProfile({ ...profile, accountNumber: e.target.value.trim() })} />
+          </fieldset>}
+          {currentUser.userType === "SELLER" && <select name="bankCode" id="bankCode" defaultValue={profile.bankCode || "044"} onChange={(e) => setProfile({ ...profile, bankCode: e.target.value })} >
+            {BankList.map(bank => <option value={bank.code.trim()} key={bank.slug}>{bank.name}</option>)}
+          </select>}
           <div className="my-4 submit-btn-wrapper">
             <input className='submit-btn w-100 p-2' type="submit" value="Update" />
           </div>
