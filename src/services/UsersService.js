@@ -49,6 +49,6 @@ export default class UsersService {
 
   static updateProfile = async (payload) => {
     // return await APICall(`${this.baseUrl}/api/update-user-info`, 'PUT', payload);
-    return await APICall(`${this.baseUrl}/user/update`, 'PUT', payload);
+    return await APICall(`${this.baseUrl}/user/update/${payload.userId}`, 'PUT', payload);
   }
 }
