@@ -12,9 +12,9 @@ const Settings = ({ currentUser }) => {
 
     const name = ((profile.name !== currentUser.name) && profile.name.length >= 1) ? profile.name : undefined;
     const phone = (profile.phone !== currentUser.phone) ? profile.phone : undefined;
-    const businessName = profile.businessName !== currentUser.businessName ? profile.businessName : undefined;
-    const accountNumber = profile.accountNumber !== currentUser.accountNumber ? profile.accountNumber : undefined;
-    const bankCode = profile.bankCode !== currentUser.bankCode ? profile.bankCode : undefined;
+    const businessName = (currentUser === "SELLER" && profile.businessName !== currentUser.businessName) ? profile.businessName : undefined;
+    const accountNumber = (currentUser === "SELLER" && profile.accountNumber !== currentUser.accountNumber) ? profile.accountNumber : undefined;
+    const bankCode = (currentUser === "SELLER" && profile.bankCode !== currentUser.bankCode) ? profile.bankCode : undefined;
 
     const payload = {
       ...(name && { name }),
@@ -31,12 +31,14 @@ const Settings = ({ currentUser }) => {
 
     console.log(payload);
     try {
-      // const { data } = await UsersService.updateProfile(currentUser.id, payload);
+      const { data } = await UsersService.updateProfile(currentUser.id, payload);
+      console.log(data);
       displayAlert('success', 'Profile updated successfully');
-      // localStorage.setItem('currentUser', JSON.stringify({ ...currentUser, name: data.updatedName, phone: data.updatedPhone, school: data.updatedSchool }))
-      // refresh();
+      localStorage.setItem('currentUser', JSON.stringify({ ...data }));
+      refresh();
     } catch (error) {
       displayAlert('error', error.response.data.message);
+      return
     }
   }
 
