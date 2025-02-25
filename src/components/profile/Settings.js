@@ -5,7 +5,7 @@ import UsersService from '../../services/UsersService';
 import { BankList } from '../../utilities/banks';
 
 const Settings = ({ currentUser }) => {
-  const [profile, setProfile] = useState({ ...currentUser });
+  const [profile, setProfile] = useState({...currentUser});
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -24,16 +24,19 @@ const Settings = ({ currentUser }) => {
       ...(bankCode && { bankCode })
     };
 
+    console.log(payload);
     // If no changes made, ensure the user is not updated
     if (Object.keys(payload).length === 0) {
       return
     }
 
+    console.log(payload);
+
     try {
       const { data } = await UsersService.updateProfile(currentUser.id, payload);
       displayAlert('success', 'Profile updated successfully');
-      localStorage.setItem('currentUser', JSON.stringify({ ...data }));
-      refresh();
+      localStorage.setItem('currentUser', JSON.stringify({ ...data, token: currentUser.token }));
+      // refresh();
     } catch (error) {
       displayAlert('error', error.response.data.message);
       return
