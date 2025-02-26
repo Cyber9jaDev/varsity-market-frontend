@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import "./styles/product.scss";
 import Pagination from "../components/Pagination";
-import { categories, displayAlert, findCategoryLabel, orderBy } from "../utilities/utils";
+import { categories, displayAlert, findCategoryLabel, orderBy, tomorrow } from "../utilities/utils";
 import schools from "../utilities/schools";
 import RangeSlider from "react-range-slider-input";
 import ProductService from "../services/ProductService";
@@ -13,21 +13,10 @@ import Empty from "../components/Empty";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
-const dateHandler = () => {
-  let today = new Date();
-  today.setDate(today.getDate() + 1);
-  return today.toISOString().split('T')[0];
-}
-const tomorrow = dateHandler();
 const price = localStorage.getItem("price");
 
 const Product = () => {
-  const {
-    dispatch,
-    location,
-    category,
-    filterModalIsOpen
-  } = useAppContext();
+  const { dispatch, location, category, filterModalIsOpen } = useAppContext();
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,7 +67,7 @@ const Product = () => {
 
   useEffect(() => {
     getProducts();
-  }, [values.page]);
+  }, []);
 
   useEffect(() => {
     updateFilter();
@@ -114,9 +103,9 @@ const Product = () => {
       <div className="container">
         {filterModalIsOpen === false &&
           <header className="border d-block p-2">
-            <p className="category-label d-inline-block m-0 me-2 fs-5"> Categories </p>
-            <p className="d-inline-block m-0 me-2 fs-5"> / </p>
-            <p className="category-label d-inline-block m-0 fs-5">{findCategoryLabel(category, values)} </p>
+            <p className="category-label d-inline-block m-0 me-2 fs-6"> Categories </p>
+            <p className="d-inline-block m-0 me-2 fs-6"> / </p>
+            <p className="category-label d-inline-block m-0 fs-6">{findCategoryLabel(category, values)} </p>
           </header>
         }
       </div>
@@ -228,7 +217,7 @@ const Product = () => {
                 </div>
               </div>
               {/* Products */}
-              { isLoading ? <Loading /> : (!isLoading && hasError) ? <Error /> :
+              {isLoading ? <Loading /> : (!isLoading && hasError) ? <Error /> :
                 (!isLoading && !hasError && values.products?.length === 0) ? <Empty /> : <div className="container mt-3">
                   <div className="row products-container">
                     {products?.map(product => <ProductCard view={view} category={product.category} key={product.id} {...product} />)}

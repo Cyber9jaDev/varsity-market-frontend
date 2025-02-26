@@ -1,6 +1,13 @@
 import toast from 'react-hot-toast';
 import schools from './schools';
 
+const dateHandler = () => {
+  let today = new Date();
+  today.setDate(today.getDate() + 1);
+  return today.toISOString().split('T')[0];
+}
+export const tomorrow = dateHandler();
+
 export const categories = [
   // {
   //   value: 'ALL',

@@ -5,7 +5,7 @@ const Error = () => {
   return (
     <section id='error'>
       <div className="error-container">
-        <strong> An error occurred, Please try again </strong>
+        <strong> No Items to show at this time <br /> Please try again later</strong>
       </div>
     </section>
   )
