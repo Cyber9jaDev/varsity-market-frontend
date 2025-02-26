@@ -4,25 +4,15 @@
   background-color: #fff;
   min-height: 78vh;
 
+  header {
+    margin-top: 60px;
+  }
+
   .icon {
     cursor: pointer;
     color: green;
     width: 1rem;
     height: 1rem;
-  }
-
-  .select {
-    border: none;
-    border-radius: 3px;
-  }
-
-  .date-picker {
-    padding: 7px;
-    font-size: 17px;
-    border: 1px solid rgb(197, 194, 194);
-    border-radius: 3px;
-    outline: #2196f3;
-    background: white;
   }
 
   .products-container {
@@ -113,7 +103,8 @@
     width: 100%;
   }
 
-  .list-view-product-quantity, .grid-view-product-quantity {
+  .list-view-product-quantity,
+  .grid-view-product-quantity {
     font-size: 14px;
     font-weight: 500;
   }
@@ -135,7 +126,6 @@
     font-family: "Cabin", sans-serif;
     text-align: end;
     font-size: 16px;
-    
   }
 
   .list-view-product-date-wrapper {
@@ -218,14 +208,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 3px;
+
+    label {
+      font-size: 13px;
+      font-family: "Source Sans Pro", sans-serif;
+      color: #393434;
+      letter-spacing: 0.25px;
+      font-weight: 600;
+    }
+
+    input,
+    select {
+      font-size: 13px;
+      height: 40px;
+      outline: none;
+      border: 1px solid rgb(64, 181, 220);
+      letter-spacing: 0.25px;
+      color: #212121;
+      border-radius: 3px;
+      padding: 0 5px;
+    }
+
+    ::placeholder {
+      font-size: 13px;
+    }
   }
   .search-control {
     padding: 7px;
-    font-size: 17px;
-    border: 1px solid rgb(197, 194, 194);
+    font-size: 13px;
     border-radius: 3px;
     outline: #2196f3;
+    border: 0.001px solid rgb(64, 181, 220);
     width: 100%;
   }
   .search-btn {
@@ -234,14 +248,14 @@
     padding: 7px;
     background: #01a185;
     color: #fff;
-    font-size: 17px;
-    border: 1px solid rgb(197, 194, 194);
+    font-size: 13px;
+    border: 0.001px solid rgb(64, 181, 220);
     border-left: none; /* Prevent double borders */
     cursor: pointer;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    font-family: "Cabin", sans-serif;
-    font-weight: 600;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 500;
   }
   .search-btn:hover {
     transition: all 1s ease;
@@ -255,9 +269,11 @@
   }
   .range-slider {
     z-index: 0;
+    font-size: 12px;
   }
   ::placeholder {
     opacity: 0.5;
+    font-family: "Cabin", sans-serif;
   }
   .price-range-btn {
     & button {

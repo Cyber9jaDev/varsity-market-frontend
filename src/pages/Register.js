@@ -7,7 +7,7 @@ import { BankList } from '../utilities/banks';
 
 const Register = () => {
   const { register, currentUser } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
