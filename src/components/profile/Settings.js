@@ -36,7 +36,7 @@ const Settings = ({ currentUser }) => {
       const { data } = await UsersService.updateProfile(currentUser.id, payload);
       displayAlert('success', 'Profile updated successfully');
       localStorage.setItem('currentUser', JSON.stringify({ ...data, token: currentUser.token }));
-      // refresh();
+      refresh();
     } catch (error) {
       displayAlert('error', error.response.data.message);
       return

@@ -18,9 +18,9 @@ const Checkout = () => {
       const { data } = await PaymentService.initializeTransaction({
         productId: state.product.id,
         quantity: Number(state.quantity),
-        callback_url: "http://localhost:3000/verify-payment",
+        callback_url: "https://sore-deborah-cyber9ja-1bb31953.koyeb.app/verify-payment",
       });
-      console.log(data);
+      // console.log(data);
       window.location.href = data.data.authorization_url
     } catch (error) {
       console.log(error.message);
