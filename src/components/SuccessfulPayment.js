@@ -1,6 +1,7 @@
 import React from 'react';
 import formatNaira from 'format-to-naira';
 import { convertDate } from '../utilities/utils';
+import { Link } from 'react-router-dom';
 
 
 const SuccessfulPayment = ({ paymentData }) => {
@@ -53,6 +54,8 @@ const SuccessfulPayment = ({ paymentData }) => {
       <form onSubmit={printReceipt}>
         <button >Print</button>
       </form>
+
+      <Link to="/">Home</Link>
       </div>
   )
 }
